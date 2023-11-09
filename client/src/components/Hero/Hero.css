@@ -1,0 +1,120 @@
+.hero{
+    width: 100svw;
+    height: 90svh;
+    overflow: hidden; 
+    position: relative;
+}
+.slide__wrapper{
+    position: relative;
+    width: fit-content;
+    height: 100%;
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+.slide__wrapper .slide{
+    position: relative;
+    width:100svw;
+    height: 100%;
+    display: flex;
+}
+.slide__wrapper .slide .slide__content{
+    width: 100%;
+    color: #fff;
+    background: linear-gradient(0deg, #242428 0%, #24242800 15%, #24242800 60%);
+    height: 100%;
+    position:absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 3rem;
+    gap: 0.5rem;
+    z-index: 1;
+}
+
+.anime__title{
+    font-size: 2.5rem;
+    width: 50%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    overflow-wrap: break-word;
+}
+.anime__stats{
+    display: flex;
+    gap: 0.5rem;
+}
+.stat{
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    cursor: pointer;
+}
+.quality,.episode__count{
+    background-color: aquamarine;
+    padding-inline: 0.1rem;
+    border-radius: 5px;
+    color: #000;
+    font-size: small;
+    font-weight: 600;
+}
+.quality{
+    background-color: #ffdd95;
+}
+.description{
+    margin-top: 1rem;
+    width: 50%;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+}
+.button__wrapper{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    cursor: pointer;
+}
+.btn{
+    padding: 0.7rem;
+    border-radius: 20px;
+    color:#fff;
+    font-size: 1.2rem;
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+    background-color: #484849;
+}
+.watch__now{
+    background-color: #ffdd95;
+    color: #000;
+    cursor: pointer;
+}
+/* .slide__image__Wrapper{
+    position: relative;
+    width: 70%;
+    height: 100%;
+    right: 0;
+} */
+.slide__image__Wrapper .slide__img{
+    position: absolute;
+    right: 0;
+    width: 70%;
+    height: 100%;
+    object-fit: cover;
+} 
+
+  .slide__wrapper .slide .slide__content::after , .slide__wrapper .slide .slide__content::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #242428 30%, #242428d4 35%, #24242800 45%);
+    z-index: -2;
+  } 
+  .slide__wrapper .slide .slide__content::before{
+    left:95%;
+    background: linear-gradient(180deg, #1a1a25 10%, #242428d4 15%, #24242800 35%);
+  }
+
+
+  
