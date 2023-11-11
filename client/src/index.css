@@ -3,6 +3,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  scrollbar-color: #ffdd95; 
+scrollbar-width: thin; 
 }
 input:focus,
 input:focus-visible {
@@ -33,4 +35,14 @@ a,a:hover,a:active,a:visited{
 
 body{
   background-color: #000000db;
+  width:100%;
 }
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ffdd95; 
+}
+
+

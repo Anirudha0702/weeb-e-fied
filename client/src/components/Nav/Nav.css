@@ -1,6 +1,6 @@
 .navbar{
     --height:4rem;
-    position: fixed;
+    position:relative;
     top:0;
     display: flex;
     align-items: center;
@@ -17,6 +17,8 @@
     position: relative;
 }
 .profile-photo-wrapper{
+    width:calc(var(--height) - 1rem) ;
+    height:calc(var(--height) - 1rem);
     border-radius: 50%;
 }
 .profile-photo{
@@ -81,6 +83,7 @@ input[type="text"]{
     justify-content: center;
     background-color: #0000008c;
     padding-block: 0.5rem;
+    z-index: 999;
 }
 .search-box__low-resolution input[type="text"]{
     width: 85%;
@@ -143,6 +146,9 @@ input[type="text"]{
 
 
 @media screen and (min-width: 768px){
+    .navbar{
+        position: fixed;
+    }
     .search-box{
         display:flex;
     }

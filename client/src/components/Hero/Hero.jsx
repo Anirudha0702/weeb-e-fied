@@ -12,6 +12,7 @@ import {
 } from "react-icons/fa";
 import {BsFillInfoCircleFill} from "react-icons/bs"
 import { Link } from "react-router-dom";
+import Spinner from "../Loaders/Spinner/Spinner";
 const Hero = () => {
   const [curent, SetCurrent] = useState(0)
   useEffect(() => {
@@ -30,7 +31,9 @@ const Hero = () => {
     })
 
     if(recentAnimes.isLoading){
-        return <div>Loading...</div>
+        return <div className="hero">
+          <Spinner/>
+        </div>
     }
     
   return (

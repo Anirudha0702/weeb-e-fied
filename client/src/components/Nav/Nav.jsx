@@ -1,12 +1,16 @@
 import {BsSearch,BsWechat} from "react-icons/bs"
 import {Link} from 'react-router-dom'
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Logo from "./../../Assets/de.png"
 import {FaUserAlt} from 'react-icons/fa'
 import {AiFillSetting,AiFillHeart} from 'react-icons/ai'
 import {LuLogOut} from 'react-icons/lu'
+import {signInWithPopup} from 'firebase/auth';
+import {auth,provider} from './../../utils/firebase'
 import "./Nav.css"
+import { Auth } from "../Provider/AuthProvider";
 const Nav = () => {
+    const {currentUser}=useContext(Auth)
     const session={
         status:'authenticated',
         data:{
@@ -22,8 +26,8 @@ const Nav = () => {
         height:"100%",
         objectFit:"cover"
     }
-    const handleSignIn=()=>{
-
+    const handleSignIn=async()=>{
+        const res= await signInWithPopup(auth, provider);
     }
     const handleSearch=(e)=>{}
   return (
@@ -48,21 +52,24 @@ const Nav = () => {
             <div className='wrapper'>
             <BsSearch className='search-icon__low-resolution' onClick={()=>{setShowSearchbar(!showSearchbar)}}/>
             {
-                session.status!=='authenticated'?(
+                currentUser!==null?(
                     <>
                     <div className='profile-photo-wrapper'onClick={()=>{setNavOpen(!navOpen)}}>
                         <img
-                            src={Logo}
+                            src={currentUser?.photoURL}
                             alt='user Image'
                             style={imgStyle}
                             className='profile-photo'
+                            referrerPolicy="no-referrer"
                             />
                     </div>
                     {
                         navOpen &&
                         <div className='profile-options'>
-                            <span>Anirudha Pradhan</span>
-                            <span>anirudhapradhan403@gmail/com</span>
+                            <span>
+                                {currentUser?.displayName}
+                            </span>
+                            <span>{currentUser.email}</span>
                             <ol>
                                 <li className="option"><FaUserAlt/>Profile</li>
                                 <li className="option"><AiFillHeart/>WatchList</li>

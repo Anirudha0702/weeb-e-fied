@@ -6,9 +6,10 @@ const app = express();
 app.use(cors({
     origin: "*",
     methods : ["GET"],
-    credentials: true
+    credentials: true 
 }))
-app.use("/api/watch",require("./routes/Episodes"))
+app.use('/api/watch',require('./routes/Episode'))
+app.use("/api/info",require("./routes/Episodes"))
 app.use("/api/search",require("./routes/Search"))
 app.get("/",(req,res)=>{
     console.log("API is running")

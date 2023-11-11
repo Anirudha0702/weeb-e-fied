@@ -1,6 +1,6 @@
 import { RouterProvider,createBrowserRouter,Outlet } from "react-router-dom";
 import Home from "../../Pages/Home";
-import Watch from "../../Pages/Watch";
+import Watch from "../../Pages/Watch/Watch";
 import Nav from "../Nav/Nav";
 const Layout=()=>{
     return(
