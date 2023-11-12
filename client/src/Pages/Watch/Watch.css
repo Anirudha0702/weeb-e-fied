@@ -25,7 +25,7 @@
     content: "Watching "attr(data-anime);
     display: block;
     position: absolute;
-    width: 100%;
+    width:fit-content;
     height: 3rem;
     top:-2rem;
     color:#ececec;
@@ -37,7 +37,7 @@
     position: relative;
     width: 100%;
     color: #fff;
-    height: 10rem;
+    height: 20rem;
     order: 2;
     overflow-y: scroll;
 }
@@ -46,7 +46,9 @@
     font-size: 1.2rem;
     padding: 0.5rem;
     display: block;
-
+    position: sticky;
+    top: 0;
+    background-color: rgb(0, 0, 0);
 
 }
 .episode__card{
@@ -80,15 +82,17 @@
     height: fit-content;
     position: relative;
     padding: 0.5rem;
+    flex-wrap: wrap;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-top: 1rem;
   }
 .anime__poster__wrapper{
     position: relative;
-    width: 5rem;
+    width: 6rem;
     aspect-ratio: 1/2;
     margin-right: 1rem;
+    flex-shrink: 0;
     flex-shrink: 0;
 }
 .anime__poster{

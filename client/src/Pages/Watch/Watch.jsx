@@ -1,4 +1,4 @@
-import  { useEffect,useState } from 'react';
+import  { useState } from 'react';
 import { useParams } from "react-router-dom";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer" 
 import {FaPlayCircle} from "react-icons/fa"
@@ -18,9 +18,6 @@ const Watch = () => {
   
     return color;
   }
-  
-  const [streamURLs, setStreamURLs] = useState([]);
-  const[playingURL,setPlayingURL]=useState("")
 
   const param = useParams();
   const anime=useQuery(
@@ -49,23 +46,9 @@ const Watch = () => {
     })
     console.log(selectedEpisode)
     console.log(info?.data)
-    const stream=useQuery(
-      {
-          queryKey:["watch", `episode-${selectedEpisode}`], 
-          queryFn:async () => {
-              const response = await axios.get(`${import.meta.env.VITE_WEEB_E_FIED_API}/api/watch/${info?.data?.episodes[selectedEpisode-1]?.id}`);
-              return response.data;
-            },
-            enabled: !!info.data
-      }
-  );  
+    
 
-  console.log(stream) 
-  useEffect(() => {
-    setStreamURLs(stream.data);
-    const url=streamURLs?.find((url) => url.quality === "default")?.url;
-    setPlayingURL(url);
-  }, [stream, streamURLs]);
+  
  const PlayVideo=(e,ep)=>{
   e.preventDefault();
   localStorage.setItem(`${animeId}`, ep);
@@ -103,7 +86,7 @@ const Watch = () => {
           } 
         </div>
         <div className="video__player">
-          <VideoPlayer url={playingURL} width={'100%'} height='100%'/>
+          <VideoPlayer episodeId={info?.data?.episodes[selectedEpisode-1]?.id} isLoading={info.isLoading}/>
         </div>
       </div>
       <div className="current-anime-details ">
