@@ -2,22 +2,12 @@ import "./VideoPlayer.css";
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import Spinner from "../Loaders/Spinner/Spinner";
+import { useStream } from "../../hooks/useHooks";
 const VideoPlayer = ({episodeId,isLoading}) => {
   const [videoUrl, setVideoUrl] = useState("");
   const [quality, setQuality] = useState('default');
-  const stream=useQuery(
-    {
-        queryKey:["watch", `episode-${episodeId}`], 
-        queryFn:async () => {
-            const response = await axios.get(`${import.meta.env.VITE_WEEB_E_FIED_API}/api/watch/${episodeId}`);
-            return response.data;
-          },
-          enabled: !!episodeId
-    }
-);  
+  const stream=useStream(episodeId); 
 console.log(stream.data)
   useEffect(() => {
     if(stream.data){

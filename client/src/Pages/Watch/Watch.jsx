@@ -2,10 +2,9 @@ import  { useState } from 'react';
 import { useParams } from "react-router-dom";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer" 
 import {FaPlayCircle} from "react-icons/fa"
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import "./Watch.css"
 import Spinner from '../../components/Loaders/Spinner/Spinner';
+import { useInfo, useSearch } from '../../hooks/useHooks';
 
 const Watch = () => {
   function getRandomColor() {
@@ -20,35 +19,11 @@ const Watch = () => {
   }
 
   const param = useParams();
-  const anime=useQuery(
-    {
-        queryKey:["search", param.name], 
-        queryFn:async () => {
-            try {
-              const response = await axios.get(`${import.meta.env.VITE_WEEB_E_FIED_API}/api/search/${param.name}`);
-            return response?.data[0];
-            } catch (error) {
-              console.log(error)
-            }
-          }
-    });
-  
-    const animeId=anime?.data?.id;
-    console.log(animeId)
+  const anime=useSearch(param.name);
+    const animeId=anime[0]?.id;
     const [selectedEpisode, setSelectedEpisode] = useState(localStorage.getItem(`${animeId}`) || 1);
-    const info=useQuery({
-      queryKey:["info", animeId], 
-      queryFn:async () => {
-        const response = await axios.get(`${import.meta.env.VITE_WEEB_E_FIED_API}/api/info/${animeId}`);
-        return response?.data;
-      },
-      enabled: !!animeId
-    })
-    console.log(selectedEpisode)
-    console.log(info?.data)
-    
+    const info=useInfo(animeId)
 
-  
  const PlayVideo=(e,ep)=>{
   e.preventDefault();
   localStorage.setItem(`${animeId}`, ep);

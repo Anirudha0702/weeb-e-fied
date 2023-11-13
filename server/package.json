@@ -4,8 +4,8 @@
   "description": "anime streaming website backend",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "start:dev": "nodemon index.js",
+    "server": "node index.js",
+    "server:dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Anirudha Pradhan",
