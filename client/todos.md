@@ -4,4 +4,4 @@
 3: User page and functionality(update,name,photo,watchlist)
 4: Complete Home page
 5: Use Footer
-6: Desgin Details page
+~~6: Desgin Details page~~

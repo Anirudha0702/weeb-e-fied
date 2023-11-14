@@ -5,8 +5,8 @@ import "./Hero.css"
 import { useEffect, useState } from "react"
 import {
   FaCalendar,
-  FaChevronLeft,
-  FaChevronRight,
+  // FaChevronLeft,
+  // FaChevronRight,
   FaClock,
   FaPlayCircle,
 } from "react-icons/fa";
@@ -71,7 +71,9 @@ const Hero = () => {
                                 <FaPlayCircle size={14}/>Watch Now
                               </button>
                             </Link>
-                            <button className="btn details"><BsFillInfoCircleFill size={14}/>Details</button>
+                            <Link to={`/details/${anime.id}?provider=kitsu`}>
+                              <button className="btn details"><BsFillInfoCircleFill size={14}/>Details</button>
+                            </Link>
                           </div>
                           </div>
                         <div className="slide__image__Wrapper">

@@ -5,18 +5,9 @@ import {FaPlayCircle} from "react-icons/fa"
 import "./Watch.css"
 import Spinner from '../../components/Loaders/Spinner/Spinner';
 import { useInfo, useSearch } from '../../hooks/useHooks';
-
+import getRandomColor from '../../utils/getRandomColor';
 const Watch = () => {
-  function getRandomColor() {
-
-    var red = Math.floor(Math.random() * 256);
-    var green = Math.floor(Math.random() * 256);
-    var blue = Math.floor(Math.random() * 256);
-
-    var color = "rgb(" + red + "," + green + "," + blue + ")";
-  
-    return color;
-  }
+ 
 
   const param = useParams();
   const anime=useSearch(param.name);
