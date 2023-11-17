@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer" 
 import {FaPlayCircle} from "react-icons/fa"
@@ -10,6 +10,9 @@ const Watch = () => {
  
 
   const param = useParams();
+  useEffect(() => {
+    document.title = `${param.name} | Weeb-e-fied`;
+  },[param.name]);
   const anime=useSearch(param.name);
     const animeId=anime[0]?.id;
     const [selectedEpisode, setSelectedEpisode] = useState(localStorage.getItem(`${animeId}`) || 1);

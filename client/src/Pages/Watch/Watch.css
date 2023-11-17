@@ -75,7 +75,7 @@
 .video__player{
     position:relative;
     width: 100%;
-    height: 60svh;
+    height: 70svh;
     background-color: #000;
 }
 .current-anime-details {
