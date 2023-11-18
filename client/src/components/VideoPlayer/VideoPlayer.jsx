@@ -89,13 +89,14 @@ const VideoPlayer = ({episodeId,isLoading}) => {
     url={videoUrl}
     width='100%' 
     height="100%" 
+    controls={true}
     ref={videoRef} 
     playing={playing}
     volume={volume}
     onProgress={handleProgress}
     onDuration={(duration)=>setDuration(duration)}>
     </ReactPlayer>
-    <div className="controls">
+    {/* <div className="controls">
       <div className="progress">
         <div className="loaded" style={{width:`${loaded}%`}}></div>
         <div className="progress__current" style={{width:`${progress}%`}}></div>
@@ -127,7 +128,7 @@ const VideoPlayer = ({episodeId,isLoading}) => {
         }
       </div>
       </div>
-    </div>
+    </div> */}
     
     </div>
    

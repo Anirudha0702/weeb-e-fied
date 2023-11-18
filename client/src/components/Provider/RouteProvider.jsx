@@ -3,6 +3,7 @@ import Home from "../../Pages/Home";
 import Watch from "../../Pages/Watch/Watch";
 import Nav from "../Nav/Nav";
 import Details from "../../Pages/Details/Details";
+import Search from "../../Pages/Search/Search";
 const Layout=()=>{
     return(
         <>
@@ -30,6 +31,10 @@ const router=createBrowserRouter(
                 {
                     path:'/details/:name',
                     element:<Details/>
+                },
+                {
+                    path:'/search',
+                    element:<Search/>
                 }
             ]
         },

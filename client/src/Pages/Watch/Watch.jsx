@@ -15,15 +15,16 @@ const Watch = () => {
   },[param.name]);
   const anime=useSearch(param.name);
     const animeId=anime[0]?.id;
+    console.log(animeId)
     const [selectedEpisode, setSelectedEpisode] = useState(localStorage.getItem(`${animeId}`) || 1);
     const info=useInfo(animeId)
-
  const PlayVideo=(e,ep)=>{
   e.preventDefault();
   localStorage.setItem(`${animeId}`, ep);
   setSelectedEpisode(ep);
  }
   if(info.isLoading || info.isPending ) {
+    console.log(info.isLoading,info.isPending)
   return <div className="main__wrapper" >
       <div className="watch__wrapper">
         <div className="episodes">

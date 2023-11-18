@@ -20,6 +20,7 @@ export function useSearch(name) {
           if (query.isError) {
             return { error: query.isError };
           }
+          console.log(query.data)
           return query.data;
 }
 export function useInfo(animeId) {

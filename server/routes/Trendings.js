@@ -1,12 +1,12 @@
 const router=require('express').Router();
 const axios=require('axios');
-router.get('/:anime',async(req,res)=>{
-    const anime=req.params.anime.toLowerCase();
-    const strikeURL=`${process.env.BASE_URL}/${anime}`;
+router.get('/',async(req,res)=>{
+    const strikeURL=`${process.env.BASE_URL}/top-airing`;
     try {
         const {data}=await axios.get(strikeURL);
         res.status(200).json(data.results);
     } catch (error) {
+        console.log(error)
         return error
     }
     

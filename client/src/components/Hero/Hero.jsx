@@ -17,8 +17,8 @@ const Hero = () => {
   const [curent, SetCurrent] = useState(0)
   useEffect(() => {
     const interval = setInterval(() => {
-        curent === 0 ? SetCurrent(9) : SetCurrent(curent + 1)
-        curent === 9 ? SetCurrent(0) : SetCurrent(curent + 1)
+        curent === 0 ? SetCurrent(7) : SetCurrent(curent + 1)
+        curent === 7 ? SetCurrent(0) : SetCurrent(curent + 1)
     }, 5000)
 
     return () => {
