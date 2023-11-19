@@ -1,14 +1,16 @@
 import { RouterProvider,createBrowserRouter,Outlet } from "react-router-dom";
-import Home from "../../Pages/Home";
-import Watch from "../../Pages/Watch/Watch";
-import Nav from "../Nav/Nav";
-import Details from "../../Pages/Details/Details";
-import Search from "../../Pages/Search/Search";
+import Home from "../Pages/Home";
+import Watch from "../Pages/Watch/Watch";
+import Nav from "../components/Nav/Nav";
+import Details from "../Pages/Details/Details";
+import Search from "../Pages/Search/Search";
+import Footer from "../components/Footer/Footer";
 const Layout=()=>{
     return(
         <>
         <Nav/>
         <Outlet/>
+        <Footer/>
         </>
     )
 

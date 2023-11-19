@@ -10,8 +10,9 @@ const Details = () => {
     const [query,setQuery]=useSearchParams();
     
     const info=useAnimeById(param.name,query.get("provider"));
-    console.log(info)
-  if(info.isLoading) return <Spinner/>
+  if(info.isLoading || info.isPending) return <div className="" style={{position:'relative',height:'90svh'}}>
+    <Spinner/>
+  </div>
   return (
     <div className="details__wrapper">
       <div className="cover__wrapper">
@@ -46,7 +47,7 @@ const Details = () => {
         <span className='description'>
           <h2>{info.data?.title}</h2>
           <p >
-          {info?.data?.description.replace(/(\r\n|\n|\r)/gm, "") || "No Description Available"}
+          {info?.data?.description?.replace(/(\r\n|\n|\r)/gm, "") || "No Description Available"}
         </p>
         <span>
           {

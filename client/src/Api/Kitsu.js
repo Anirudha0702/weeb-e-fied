@@ -2,7 +2,7 @@ import axios from 'axios';
 import TopAnimes from '../Data/TopAnimes';
 export async function getRecentAnimes(){
     try{
-      const res=await axios.get(`${import.meta.env.VITE_KITSU_API}?filter[status]=current&page[limit]=8&sort=-averageRating`)
+      const res=await axios.get(`${import.meta.env.VITE_KITSU_API}/anime?filter[status]=current&page[limit]=8&sort=-averageRating`)
       return res.data;      
     }
     catch(error){
@@ -13,9 +13,8 @@ export async function getRecentAnimes(){
 
 export async function getTrendings(){
   try{
-    const res=await axios.get(`${import.meta.env.VITE_WEEB_E_FIED_API}/api/trendings`)
-    console.log(res.data)
-    return res.data;      
+    const res=await axios.get(`${import.meta.env.VITE_KITSU_API}/trending/anime`)
+    return res.data.data;      
   }
   catch(error){
     console.log(error)

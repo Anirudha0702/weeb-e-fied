@@ -1,7 +1,8 @@
 .details__wrapper{
     width: 100%;
     position: relative;
-    height: 90svh;
+    height: fit-content;
+    min-height: 80svh;
 }
 .details__wrapper .cover__wrapper{
     width: 100%;

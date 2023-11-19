@@ -8,15 +8,9 @@ import {LuLogOut} from 'react-icons/lu'
 import {signInWithPopup} from 'firebase/auth';
 import {auth,provider} from './../../utils/firebase'
 import "./Nav.css"
-import { Auth } from "../Provider/AuthProvider";
+import { Auth } from "../../Provider/AuthProvider";
 const Nav = () => {
     const {currentUser}=useContext(Auth)
-    const session={
-        status:'authenticated',
-        data:{
-            user:
-            {name:'Anirudha Pradhan',email:''}}};
-    const user=session?.data?.user;
     const [search,setSearch]=useState("")
     const[showSearchbar,setShowSearchbar]=useState(false)
     const [navOpen,setNavOpen]=useState(false)

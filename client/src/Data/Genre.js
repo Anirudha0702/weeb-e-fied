@@ -1,0 +1,27 @@
+const  Genres = [
+    "Shonen",
+    "Shojo",
+    "Seinen",
+    "Josei",
+    "Mecha",
+    "Fantasy",
+    "Science Fiction",
+    "Slice of Life",
+    "Comedy",
+    "Romance",
+    "Action",
+    "Adventure",
+    "Drama",
+    "Supernatural",
+    "Horror",
+    "Mystery",
+    "Sports",
+    "Historical",
+    "School",
+    "Music",
+    "Thriller",
+    "Psychological",
+    "Magical Girl",
+    "Superpowers"
+  ];
+  export default Genres;

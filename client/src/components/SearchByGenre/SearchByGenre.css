@@ -1,0 +1,27 @@
+.genre__wrapper{
+    position: relative;
+    width: 10rem;
+    flex-grow: 1;
+    height: fit-content;
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.genre__wrapper:after{
+    content: 'Genres';
+    position: absolute;
+    top: -3rem;
+    left: 1rem;
+    display: block;
+    color:#ffdd95;
+    font-size:clamp(2rem, 1.5vw, 2.2rem);
+    font-weight: 600;
+}
+.genre{
+    font-weight: bold;
+    padding: 0.2rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}

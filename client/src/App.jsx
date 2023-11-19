@@ -1,7 +1,7 @@
 
 import './App.css'
 import Home from './Pages/Home'
-import RouteProvider from './components/Provider/RouteProvider'
+import RouteProvider from './Provider/RouteProvider'
 
 
 

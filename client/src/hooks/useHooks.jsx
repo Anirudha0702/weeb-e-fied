@@ -70,7 +70,7 @@ export function useAnimeById(id,provider){
 async function getAnimeInfo(id,provider){
   let res="";
   if(provider==='kitsu'){
-    res= await axios.get(`${import.meta.env.VITE_KITSU_API}/${id}`)
+    res= await axios.get(`${import.meta.env.VITE_KITSU_API}/anime/${id}`)
     let info=res.data;
     return {
       title:info.data.attributes.titles.en || info.data.attributes.titles.en_jp || info.data.attributes.titles.ja_jp,
@@ -90,7 +90,6 @@ async function getAnimeInfo(id,provider){
   if(provider==='jikan'){
     res= await axios.get(`${import.meta.env.VITE_JIKAN_API}/anime/${id}`)
     let info=res.data.data;
-    console.log(info)
     return {
       title:info.title || info.title_english || info.title_japanese || null,
       poster_image:info.images.jpg?.image_url || info.images.jpg?.small_image_url || info.images.jpg?.large_image_url || null,

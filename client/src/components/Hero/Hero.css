@@ -20,7 +20,7 @@
 .slide__wrapper .slide .slide__content{
     width: 100%;
     color: #fff;
-    background: linear-gradient(0deg, #242428 0%, #24242800 15%, #24242800 60%);
+    /* background: linear-gradient(0deg, #242428 0%, #24242800 15%, #24242800 60%); */
     height: 100%;
     position:absolute;
     inset: 0;
