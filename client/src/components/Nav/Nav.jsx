@@ -1,7 +1,7 @@
 import {BsSearch,BsWechat} from "react-icons/bs"
 import {Link} from 'react-router-dom'
 import { useContext, useState } from 'react';
-import Logo from "../../Assets/de.png"
+import Logo from "../../assets/de.png"
 import {FaUserAlt} from 'react-icons/fa'
 import {AiFillSetting,AiFillHeart} from 'react-icons/ai'
 import {LuLogOut} from 'react-icons/lu'
