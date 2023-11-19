@@ -1,12 +1,12 @@
 import {BsSearch,BsWechat} from "react-icons/bs"
 import {Link} from 'react-router-dom'
 import { useContext, useState } from 'react';
-import Logo from "./../../Assets/de.png"
+import Logo from "../../Assets/de.png"
 import {FaUserAlt} from 'react-icons/fa'
 import {AiFillSetting,AiFillHeart} from 'react-icons/ai'
 import {LuLogOut} from 'react-icons/lu'
 import {signInWithPopup} from 'firebase/auth';
-import {auth,provider} from './../../utils/firebase'
+import {auth,provider} from '../../utils/firebase'
 import "./Nav.css"
 import { Auth } from "../../Provider/AuthProvider";
 const Nav = () => {
