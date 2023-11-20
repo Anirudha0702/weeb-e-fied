@@ -30,9 +30,9 @@ const Details = () => {
           className="poster__image" />
          </div>
          <div className="option__wrapper">
-          <Link to={`/watch/${info.data?.title}`} style={{padding:0}} className='link'>
-                              <button className="watch" >
-                                <FaPlayCircle size={14}/>Watch Now
+          <Link to={`/watch/${info.data?.title}`} style={{padding:0}} className='_link'>
+                              <button className="_watch" >
+                                <FaPlayCircle size={14}/><p>Watch Now</p>
                               </button>
                             </Link>
             <select name="" id="" className='options' >
@@ -52,14 +52,14 @@ const Details = () => {
         <span>
           {
             info.data?.genres.map((genre,index)=>(
-              <span key={index} className="genre" style={{backgroundColor:getRandomColor()}}>{genre}</span>
+              <span key={index} className="_genre" style={{backgroundColor:getRandomColor()}}>{genre}</span>
             )
             )
           }
         </span>
         </span>
         <div className="_details">
-         <Link to={`https://youtube.com/watch?v=${info.data?.youtubeTrailer}`} className='link'>
+         <Link to={`https://youtube.com/watch?v=${info.data?.youtubeTrailer}`} className='_link'>
           <div className="play__trailer" style={{backgroundImage:`url('${info.data?.poster_image}')`}}>
             <FaPlayCircle size={50}/>Play Trailer
           </div>

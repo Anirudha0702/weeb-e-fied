@@ -25,17 +25,19 @@
     gap: 0.5rem;
     justify-content:flex-start;
     align-items: flex-start;
+    padding-block: 1rem;
 }
 .poster__option__wrapper{
     width: fit-content;
     display: flex;
-    top: -5rem;
+    top: -6rem;
     padding-inline: 1rem;
     justify-content: flex-start;
     align-items: flex-start;
     gap: 1rem;
     margin-top: 1rem;
     position: relative;
+    flex-grow: 1;
 }
 .poster__wrapper{
     position: relative;
@@ -48,11 +50,16 @@
     display: flex;
     gap: 1rem;
     height:100%;
+    flex-grow: 1;
     padding-top: 2rem;
     flex-direction: column;
     justify-content: flex-start;
 }
-.watch{
+._watch{
+    display: flex;
+    word-break: keep-all;
+    width: fit-content;
+    align-items: center;
     border-radius: 10px;
     padding: 0.5rem;
     display: flex;
@@ -61,6 +68,7 @@
 }
 .options{
     height: 2rem;
+    width: fit-content;
     transition: all 0.3s ease-in-out;
     background-color: #ffffff;
     border-radius: 10px;
@@ -94,11 +102,14 @@ options:focus,options:focus-visible,options:active{
     font-size: 1.2rem;
     font-weight: bold;
     padding: 0.5rem 0.3rem;
+    width: 100%;
+    display: block;
 
 }
-.link {
+._link {
     color: #000000 ;
     font-weight: bold;
+    margin: 0;
   }
   .link:hover {
      color: rgb(0, 0, 255)

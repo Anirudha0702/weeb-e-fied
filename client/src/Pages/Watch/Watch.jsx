@@ -6,6 +6,7 @@ import "./Watch.css"
 import Spinner from '../../components/Loaders/Spinner/Spinner';
 import { useInfo, useSearch } from '../../hooks/useHooks';
 import getRandomColor from '../../utils/getRandomColor';
+import { BiError } from "react-icons/bi";
 const Watch = () => {
  
 
@@ -13,9 +14,10 @@ const Watch = () => {
   useEffect(() => {
     document.title = `${param.name} | Weeb-e-fied`;
   },[param.name]);
+
   const anime=useSearch(param.name);
+
     const animeId=anime[0]?.id;
-    console.log(animeId)
     const [selectedEpisode, setSelectedEpisode] = useState(localStorage.getItem(`${animeId}`) || 1);
     const info=useInfo(animeId)
  const PlayVideo=(e,ep)=>{
@@ -32,10 +34,23 @@ const Watch = () => {
         
         </div>
         <div className="video__player">
-          <Spinner/>
+          <BiError/>
         </div>
       </div>
     </div>
+  }
+  if(info.isError){
+    return <div className="main__wrapper" >
+    <div className="watch__wrapper">
+      <div className="episodes">
+      <Spinner/>
+      
+      </div>
+      <div className="video__player">
+        <Spinner/>
+      </div>
+    </div>
+  </div>
   }
   return (
     <div className="main__wrapper" >
@@ -82,7 +97,7 @@ const Watch = () => {
                   Genres:{
                     info?.data?.genres?.map((genre, index) => {
                       return (
-                        <span key={index} className="genre" style={{backgroundColor:getRandomColor(),color:"#fff"}}>
+                        <span key={index} className="_genre" style={{backgroundColor:getRandomColor(),color:"#fff"}}>
                           {genre}
                         </span>
                       );

@@ -1,5 +1,5 @@
 import {BsSearch,BsWechat} from "react-icons/bs"
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { useContext, useState } from 'react';
 import Logo from "../../assets/de.png"
 import {FaUserAlt} from 'react-icons/fa'
@@ -14,6 +14,7 @@ const Nav = () => {
     const [search,setSearch]=useState("")
     const[showSearchbar,setShowSearchbar]=useState(false)
     const [navOpen,setNavOpen]=useState(false)
+    const navigate=useNavigate();
     const imgStyle={
         position:"absolute",
         width:"100%",
@@ -23,7 +24,9 @@ const Nav = () => {
     const handleSignIn=async()=>{
         const res= await signInWithPopup(auth, provider);
     }
-    const handleSearch=(e)=>{}
+    const handleSearch=(e)=>{
+        navigate(`/search/${search}`)
+    }
   return (
     <div>
     <header className="navbar">

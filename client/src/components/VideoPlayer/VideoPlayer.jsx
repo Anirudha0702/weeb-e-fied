@@ -5,7 +5,7 @@ import ReactPlayer from 'react-player';
 import Spinner from "../Loaders/Spinner/Spinner";
 import { useStream } from "../../hooks/useHooks";
 import { IoIosPlay,IoIosPause } from "react-icons/io";
-import { BiSolidVolumeMute } from "react-icons/bi";
+import { BiError, BiSolidVolumeMute } from "react-icons/bi";
 import { MdOutlineFullscreen ,MdOutlineFullscreenExit } 
 from "react-icons/md";
 import { GiSpeaker } from "react-icons/gi";
@@ -21,6 +21,7 @@ const VideoPlayer = ({episodeId,isLoading}) => {
   const[quality, setQuality] = useState('default');
   const[isFullScreen, setIsFullScreen] = useState(false);
   const stream=useStream(episodeId); 
+  console.log(stream)
   const videoRef=useRef(null);
   const video_Ref=useRef(null);
   const play=()=>{
@@ -79,23 +80,35 @@ const VideoPlayer = ({episodeId,isLoading}) => {
       setVideoUrl(url);
     }
   }, [quality, stream.data]);
-  if(isLoading || stream.data===undefined|| stream.isPending || stream.isLoading) {
-    <Spinner/>
+  if(stream.isPending || stream.isLoading) {
+    <div className="">
+      <Spinner/>
+    </div>
+  }
+  if(stream.isError){
+    return <div className="error">
+    <BiError/><span>Try after sometime</span>
+    </div>
   }
   return (
     <div className="component__wrapper">
     <div className="player__wrappper" ref={video_Ref}>
-    <ReactPlayer 
-    url={videoUrl}
-    width='100%' 
-    height="100%" 
-    controls={true}
-    ref={videoRef} 
-    playing={playing}
-    volume={volume}
-    onProgress={handleProgress}
-    onDuration={(duration)=>setDuration(duration)}>
-    </ReactPlayer>
+    {
+      ReactPlayer.canPlay(videoUrl)?<ReactPlayer 
+      url={videoUrl}
+      width='100%' 
+      height="100%" 
+      controls={true}
+      ref={videoRef} 
+      playing={playing}
+      volume={volume}
+      onProgress={handleProgress}
+      onDuration={(duration)=>setDuration(duration)}>
+      </ReactPlayer>:
+      <div className="error">
+        <BiError/><span>Try after sometime</span>
+      </div>
+    }
     {/* <div className="controls">
       <div className="progress">
         <div className="loaded" style={{width:`${loaded}%`}}></div>

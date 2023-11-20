@@ -18,9 +18,8 @@ export function useSearch(name) {
           }
         
           if (query.isError) {
-            return { error: query.isError };
+            return { error: query.error };
           }
-          console.log(query.data)
           return query.data;
 }
 export function useInfo(animeId) {
@@ -31,17 +30,11 @@ export function useInfo(animeId) {
     },
     enabled: !!animeId
   })
-  if (query.isLoading) {
-      return {isLoading:query.isLoading};
-    }
-        
-  if (query.isError) {
-    return { error: query.isError };
-    }
   return {
     data:query.data,
     isLoading:query.isLoading,
     isPending:query.isPending,
+    isError:query.isError
   };
 }
 export function useStream(episodeId){
