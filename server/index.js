@@ -3,12 +3,13 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 dotenv.config();
 const app = express();
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    next();
-  });
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Methods', 'GET');
+//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//     next();
+//   });
+app.use(cors());
 app.use('/api/watch',require('./routes/Episode'))
 app.use("/api/info",require("./routes/Episodes"))
 app.use("/api/search",require("./routes/Search"))
@@ -21,3 +22,4 @@ app.get("/",(req,res)=>{
 app.listen(process.env.PORT,()=>{
     console.log(`Server is running on port ${process.env.PORT}`)
 })
+export default app;
