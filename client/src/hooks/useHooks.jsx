@@ -1,15 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-const requestHandeler = async (endpoint) => {
-  const res=await axios.get(`${import.meta.env.VITE_WEEB_E_FIED_API}/api/${endpoint}`);
-  return res.data;
+const requestHandeler = async (endpoint,provider='web-e-fied') => {
+  if(provider==='web-e-fied'){
+    const res=await axios.get(`${import.meta.env.VITE_WEEB_E_FIED_API}/api/${endpoint}`);
+    return res.data;
+  }
+  if(provider==='jikan'){
+    const res=await axios.get(`${import.meta.env.VITE_JIKAN_API}/anime?q=${endpoint}&sfw`);
+    return res.data?.data;
+  }
 }
-export function useSearch(name) {
+export function useSearch(name,provider='web-e-fied') {
     const query= useQuery(
         {
             queryKey:["search", name], 
             queryFn: async() => {
-                return requestHandeler(`search/${name}`)
+                return requestHandeler(`search/${name}`,provider)
               },
               enabled:!!name
         });
@@ -18,8 +24,12 @@ export function useSearch(name) {
           }
         
           if (query.isError) {
-            return { error: query.error };
+            return { 
+              error: query.error,
+              isError:query.isError,
+              };
           }
+          console.log(query.data)
           return query.data;
 }
 export function useInfo(animeId) {
