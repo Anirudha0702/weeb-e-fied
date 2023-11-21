@@ -14,7 +14,8 @@ app.use("/api/search",require("./routes/Search"))
 app.use("/api/trendings",require("./routes/Trendings"))
 app.get("/",(req,res)=>{
     console.log("API is running")
-    res.json({ defaultRoute: 'Weeb-e-Fied API' });
+    res.json({ defaultRoute: 'Weeb-e-Fied API' }); 
+    
 })
 app.listen(process.env.PORT,()=>{
     console.log(`Server is running on port ${process.env.PORT}`)
