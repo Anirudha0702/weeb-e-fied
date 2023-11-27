@@ -16,7 +16,7 @@ app.use("/api/search",require("./routes/Search"))
 app.use("/api/trendings",require("./routes/Trendings"))
 app.get("/",(req,res)=>{
     console.log("API is running")
-    res.json({ defaultRoute: 'Weeb-e-Fied API' }); 
+    res.json({ defaultRoute: 'Weeb-e-Fied API (new)' }); 
     
 })
 app.listen(process.env.PORT,()=>{
