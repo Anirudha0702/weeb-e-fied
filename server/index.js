@@ -1,15 +1,28 @@
 const express= require("express") 
 const dotenv = require("dotenv");
 const cors = require("cors");
+const mongoose = require("mongoose");
 dotenv.config();
 const app = express();
-// app.use((req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', '*');
-//     res.header('Access-Control-Allow-Methods', 'GET');
-//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-//     next();
-//   });
-app.use(cors());
+app.use(express.json());
+app.use(cors(
+    {
+        origin: ['http://localhost:5173','https://weebefied.netlify.app'],
+        methods: ['GET','POST','PUT','DELETE'],
+        credentials: true,
+        allowedHeaders: ['Content-Type', 'Authorization']
+    
+    }
+));
+
+
+main().catch(err => console.log(err))
+async function main(){
+    await mongoose.connect(process.env.MONGO_URI)
+    .then(()=> console.log("DataBase is running!"))
+    .catch(err => console.log(err))
+}
+app.use('/api/post',require('./routes/Post'))
 app.use('/api/watch',require('./routes/Episode'))
 app.use("/api/info",require("./routes/Episodes"))
 app.use("/api/search",require("./routes/Search"))

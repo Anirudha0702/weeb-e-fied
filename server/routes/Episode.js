@@ -12,7 +12,7 @@ router.get("/:episode",async(req,res)=>{
              res.status(200).json(data.sources)
         } catch (err) {
             console.log(err.message)
-            res.status(404).json({ error: "Episode not found" })
+            res.status(400).json({ error: err.message })
            
         }
 })
