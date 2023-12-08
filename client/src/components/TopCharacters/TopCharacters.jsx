@@ -1,6 +1,6 @@
 
 import './TopCharacters.css'
-import { getTopCharacters } from "../../api/jikan";
+import { getTopCharacters } from "../../Api/jikan";
 import { useQuery } from "@tanstack/react-query";
 import { FaThumbsUp } from "react-icons/fa";
 export default function TopCharacters() {
