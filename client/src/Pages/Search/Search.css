@@ -1,6 +1,7 @@
 .search__animes{
     position: relative;
     width: 100%;
+    min-height: 90svh;
     max-width: 60rem;
     display: flex;
     justify-content: center;

@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
 import Spinner from "../Loaders/Spinner/Spinner";
 import { useStream } from "../../hooks/useHooks";
-import { IoIosPlay,IoIosPause } from "react-icons/io";
 import { BiError, BiSolidVolumeMute } from "react-icons/bi";
-import { MdOutlineFullscreen ,MdOutlineFullscreenExit } 
-from "react-icons/md";
+// import { IoIosPlay,IoIosPause } from "react-icons/io";
+// import { MdOutlineFullscreen ,MdOutlineFullscreenExit } 
+// from "react-icons/md";
 // import { GiSpeaker } from "react-icons/gi";
 // import { TbRewindBackward10,TbRewindForward10 } from "react-icons/tb";
 const VideoPlayer = ({episodeId,isLoading}) => {
@@ -39,20 +39,17 @@ const VideoPlayer = ({episodeId,isLoading}) => {
   // const[playing,setPlaying]=useState(true);
   const[quality, setQuality] = useState('default');
   const stream=useStream(episodeId); 
-  console.log(episodeId)
   const[videoUrl, setVideoUrl] = useState("");
-  console.log(stream)
-  const videoRef=useRef(0);
+  // const videoRef=useRef(0);
   const video_Ref=useRef(null);
 
   useEffect(() => {
     if(stream.data){
       const url=stream.data?.find((file)=>file.quality===quality)?.url;
-      console.log(url)
       setVideoUrl(url);
     }
   }, [quality,stream.data]);
-  if(stream.isPending || stream.isLoading||isLoading) {
+  if(!stream.isIdle||stream.isPending || stream.isLoading||isLoading ) {
     <div className="">
       <Spinner/>
     </div>
@@ -66,12 +63,22 @@ const VideoPlayer = ({episodeId,isLoading}) => {
     <div className="component__wrapper">
     <div className="player__wrappper" ref={video_Ref}>
     {
-      <ReactPlayer 
+      ReactPlayer.canPlay(videoUrl)  ? (
+        <ReactPlayer 
       url={videoUrl}
       width='100%' 
       height="100%" 
       controls={true}
       />
+      ):(videoUrl==="" || videoUrl===undefined)?(<div className="">
+      <Spinner/>
+    </div>):
+      (
+        <div className="error">
+          <BiError/><span>Try after sometime</span>
+        </div>
+      )
+      
       // <div className="error">
       //   <BiError/><span>Try after sometime</span>
       // </div>

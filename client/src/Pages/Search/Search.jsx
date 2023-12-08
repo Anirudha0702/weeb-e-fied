@@ -1,19 +1,23 @@
 
 import { Link, useParams } from "react-router-dom"
 import { useSearch } from "../../hooks/useHooks"
+import Spinner from "../../components/Loaders/Spinner/Spinner"
 import './Search.css'
+import SearchError from "../../components/Errors/SearchError/SearchError"
 const Search = () => {
   const param=useParams()
   const search=useSearch(param?.key,'jikan')
-  console.log(search)
   if(search.error){
     console.log(search.error)
-      return <div style={{color:'#fff'}}>error:{search.error.message}</div>
+      return <div className="search__animes" style={{height:'90svh'}}>
+      <SearchError/>
+  </div>
   }
 if(search.isLoading || search.isPending){
-    return <div>Loading...</div>
+    return <div className="search__animes" style={{height:'90svh'}}>
+        <Spinner/>
+    </div>
 }
-console.log(search)
 return (
 <div className="search__animes" data-key={param?.key} data-found={search?25:0}>
     {
@@ -39,6 +43,7 @@ return (
                 </Link>
             )
         })
+        // <SearchError/>
     }
 </div>)
 }

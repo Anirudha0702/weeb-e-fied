@@ -5,9 +5,7 @@
     background-image:url("../../assets/watch_bg.png");
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    background-color: red;
-    
+    background-repeat: no-repeat;  
 }
 .title{
     color:#ececec;

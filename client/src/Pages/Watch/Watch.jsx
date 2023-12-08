@@ -18,7 +18,6 @@ const Watch = () => {
   const anime=useSearch(param.name);
 
     const animeId=anime[0]?.id;
-    console.log(animeId)
     const [selectedEpisode, setSelectedEpisode] = useState(localStorage.getItem(`${animeId}`) || 1);
     const info=useInfo(animeId)
  const PlayVideo=(e,ep)=>{

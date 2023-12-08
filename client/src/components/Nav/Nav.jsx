@@ -51,6 +51,9 @@ const Nav = () => {
             {
                 currentUser!==null?(
                     <>
+                    <Link to={'/community'}>
+                        <BsWechat className='community'/>
+                        </Link>
                     <div className='profile-photo-wrapper'onClick={()=>{setNavOpen(!navOpen)}}>
                         <img
                             src={currentUser?.photoURL}
@@ -79,9 +82,7 @@ const Nav = () => {
                 ):(
                     <div className='community__signin__wrapper'>
                         
-                        <Link to={'https://chat.whatsapp.com/G7TLEnqFpMlJcG7cMl828j'}>
-                        <BsWechat className='community'/>
-                        </Link>
+                        
                 <button type="" className='signin-btn' onClick={handleSignIn}>Sign In</button>
                     </div>
                     ) 

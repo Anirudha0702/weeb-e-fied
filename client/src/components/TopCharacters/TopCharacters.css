@@ -1,0 +1,28 @@
+.list-wrapper{
+    margin-top: 4rem;
+    position: relative;
+    width: 10rem;
+    padding-inline: 0.3rem;
+    flex-grow: 1;
+    height: fit-content;
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.list-wrapper::before{
+    content: 'Top Characters';
+    position: absolute;
+    top: -3rem;
+    display: block;
+    color:#ffdd95;
+    font-size:clamp(2rem, 1.5vw, 2.2rem);
+    font-weight: 600;
+
+}
+.character{
+    display: flex;
+    gap: 0.5rem;
+    color: #fff;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

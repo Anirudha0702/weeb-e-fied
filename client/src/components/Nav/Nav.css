@@ -55,7 +55,7 @@ input[type="text"]{
     margin-inline: 1rem;
     gap: 1rem;
 }
-.community__signin__wrapper .community{
+ .community{
     color:#ffdd95;
     height: calc(var(--height) - 1rem);
     aspect-ratio: 1;

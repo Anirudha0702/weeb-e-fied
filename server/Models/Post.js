@@ -9,4 +9,4 @@ const PostSchema = new mongoose.Schema({
     Comments:{type: Array, required: true},
 }, {timestamps: true}
 )
-module.exports = mongoose.model("Message", PostSchema);
+module.exports = mongoose.model("Post", PostSchema);
