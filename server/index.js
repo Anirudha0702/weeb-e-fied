@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(cors(
     {
-        origin: ['http://localhost:5173','https://weebefied.netlify.app','http://192.168.0.102:5173'],
+        origin: ['http://localhost:5173','https://weeb-e-fied.netlify.app','http://192.168.0.102:5173'],
         methods: ['GET','POST','PUT','DELETE'],
         credentials: true,
         allowedHeaders: ['Content-Type', 'Authorization']
