@@ -6,6 +6,7 @@ import Details from "../Pages/Details/Details";
 import Search from "../Pages/Search/Search";
 import Footer from "../components/Footer/Footer";
 import Community from "../Pages/Community/Community";
+import Profile from "../Pages/Profile/Profile";
 const Layout=()=>{
     return(
         <>
@@ -25,6 +26,10 @@ const router=createBrowserRouter(
                 {
                     path:"/",
                     element:<Home/>
+                },
+                {
+                    path:"/user/:id",
+                    element:<Profile/>
                 },
                 {
                     path:"/watch/:name",

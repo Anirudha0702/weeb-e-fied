@@ -71,8 +71,8 @@ const Nav = () => {
                             </span>
                             <span>{currentUser.email}</span>
                             <ol>
-                                <li className="option"><FaUserAlt/>Profile</li>
-                                <li className="option"><AiFillHeart/>WatchList</li>
+                                <li className="option" onClick={()=>{navigate(`/user/${currentUser?.uid}`)}}><FaUserAlt/>Profile</li>
+                                <li className="option" onClick={()=>{navigate(`/user/${currentUser?.uid}/watchlist`)}}><AiFillHeart/>WatchList</li>
                                 <li className="option"><AiFillSetting/>Settings</li>
                                 <li className="option"><LuLogOut/>Logout</li>
                             </ol>

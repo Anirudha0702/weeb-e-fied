@@ -21,6 +21,7 @@ const Watch = () => {
   useEffect(() => {
       if(animeId && localStorage.getItem(animeId)===null){
         localStorage.setItem(`${animeId}`, '1');
+        setSelectedEpisode(`1`)
       }
       else{
         setSelectedEpisode(localStorage.getItem(animeId));  
