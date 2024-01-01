@@ -8,30 +8,35 @@ import { useInfo, useSearch } from '../../hooks/useHooks';
 import getRandomColor from '../../utils/getRandomColor';
 import { BiError } from "react-icons/bi";
 const Watch = () => {
- 
-
   const param = useParams();
   useEffect(() => {
     document.title = `${param.name} | Weeb-e-fied`;
   },[param.name]);
-
+  
   const anime=useSearch(param.name);
+  const animeId=anime[0]?.id;
+  const lastEp=localStorage.getItem(`${animeId}`);
+  const [selectedEpisode, setSelectedEpisode] = useState(lastEp||'1');
+  const info=useInfo(animeId)
+  useEffect(() => {
+      if(animeId && localStorage.getItem(animeId)===null){
+        localStorage.setItem(`${animeId}`, '1');
+      }
+      else{
+        setSelectedEpisode(localStorage.getItem(animeId));  
+      }
 
-    const animeId=anime[0]?.id;
-    const [selectedEpisode, setSelectedEpisode] = useState(localStorage.getItem(`${animeId}`) || 1);
-    const info=useInfo(animeId)
+    },[animeId])
  const PlayVideo=(e,ep)=>{
   e.preventDefault();
   localStorage.setItem(`${animeId}`, ep);
   setSelectedEpisode(ep);
  }
   if(info.isLoading || info.isPending ) {
-    console.log(info.isLoading,info.isPending)
   return <div className="main__wrapper" >
       <div className="watch__wrapper">
         <div className="episodes">
         <Spinner/>
-        
         </div>
         <div className="video__player">
           <BiError/>
@@ -63,7 +68,7 @@ const Watch = () => {
                 <div className={`episode__card ${selectedEpisode===episode.number?'selected':""}`} key={index} onClick={(e) => PlayVideo(e,episode.number)}>
                   {`Episode ${episode.number}`}
                   {
-                    selectedEpisode===episode.number?<FaPlayCircle/>:""
+                    selectedEpisode==episode.number?<FaPlayCircle/>:""
                   }
                 </div>
               )

@@ -6,8 +6,6 @@ router.get("/:anime",async(req,res)=>{
     const strikeURL=`${process.env.BASE_URL}/info/${anime}`;
         try {
             const { data } = await axios.get(strikeURL);
-
-            console.log(data)
              res.status(200).json(data)
         } catch (err) {
             console.log(err.message)

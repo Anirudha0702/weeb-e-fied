@@ -4,51 +4,32 @@ import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
 import Spinner from "../Loaders/Spinner/Spinner";
 import { useStream } from "../../hooks/useHooks";
-import { BiError, BiSolidVolumeMute } from "react-icons/bi";
-// import { IoIosPlay,IoIosPause } from "react-icons/io";
-// import { MdOutlineFullscreen ,MdOutlineFullscreenExit } 
-// from "react-icons/md";
-// import { GiSpeaker } from "react-icons/gi";
-// import { TbRewindBackward10,TbRewindForward10 } from "react-icons/tb";
+import { BiError } from "react-icons/bi";
 const VideoPlayer = ({episodeId,isLoading}) => {
-  // const[isFullScreen, setIsFullScreen] = useState(false);
-  // const play=()=>{
-  //   setPlaying(!playing);
-  
-  // }
-  // const formatTime=(seconds)=>{
-  //   if(isNaN(seconds)){
-  //     return "00:00";
-  //   }
-  //   const date=new Date(seconds*1000);
-  //   const mm=date.getUTCMinutes();
-  //   const ss=date.getUTCSeconds().toString().padStart(2,"0");
-    
-  //   return `${mm}:${ss}`
-  // }
-  // const handleProgress=(palyed)=>{
-  //   setPlayed(palyed.playedSeconds);
-  //   setProgress((played/duration)*100);
-  //   setLoaded(palyed.loadedSeconds/duration*100);
-  // }
-  // const[duration,setDuration]=useState(0);
-  // const[played,setPlayed]=useState(0);
-  // const[progress,setProgress]=useState(0);
-  // const[volume,setVolume]=useState(0.5);
-  // const[loaded,setLoaded]=useState(0);
-  // const[playing,setPlaying]=useState(true);
   const[quality, setQuality] = useState('default');
   const stream=useStream(episodeId); 
   const[videoUrl, setVideoUrl] = useState("");
-  // const videoRef=useRef(0);
   const video_Ref=useRef(null);
+  const [seekTo,setSeekTo]=useState(localStorage.getItem(`${episodeId}`)||0);
 
+  useEffect(() => {
+    if(episodeId && localStorage.getItem(episodeId)===null){
+      localStorage.setItem(`${episodeId}`, '0');
+    }
+    else{
+      setSeekTo(localStorage.getItem(episodeId)); 
+    }
+  },[episodeId, seekTo,quality])
   useEffect(() => {
     if(stream.data){
       const url=stream.data?.find((file)=>file.quality===quality)?.url;
       setVideoUrl(url);
     }
   }, [quality,stream.data]);
+
+  const saveProgress=(time)=>{
+    localStorage.setItem(`${episodeId}`, time);
+  }
   if(!stream.isIdle||stream.isPending || stream.isLoading||isLoading ) {
     <div className="">
       <Spinner/>
@@ -61,14 +42,18 @@ const VideoPlayer = ({episodeId,isLoading}) => {
   }
   return (
     <div className="component__wrapper">
-    <div className="player__wrappper" ref={video_Ref}>
+    <div className="player__wrappper" >
     {
       ReactPlayer.canPlay(videoUrl)  ? (
         <ReactPlayer 
-      url={videoUrl}
-      width='100%' 
-      height="100%" 
-      controls={true}
+        ref={video_Ref}
+        url={videoUrl}
+        width='100%' 
+        height="100%" 
+        onReady={()=>video_Ref?.current?.seekTo(seekTo, 'seconds')}
+        controls={true}
+        playing={true}
+        onProgress={e=>{if(e.playedSeconds>10)saveProgress(e.playedSeconds)}}
       />
       ):(videoUrl==="" || videoUrl===undefined)?(<div className="">
       <Spinner/>
@@ -78,10 +63,6 @@ const VideoPlayer = ({episodeId,isLoading}) => {
           <BiError/><span>Try after sometime</span>
         </div>
       )
-      
-      // <div className="error">
-      //   <BiError/><span>Try after sometime</span>
-      // </div>
 }
     </div>
    

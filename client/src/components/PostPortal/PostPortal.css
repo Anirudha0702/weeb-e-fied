@@ -1,0 +1,48 @@
+.user__post{
+    position: fixed;
+    top:0;
+    width: 100svw;
+    height: 100svh;
+    background-color: #2b2a2ab0;
+    z-index: 9999;
+}
+.post_portal{
+    color: #fff;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    position: absolute;
+    top:50%;
+    left:50%;
+    padding-inline: 1rem;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    max-width: 30rem;
+    height:fit-content;
+    background-color: #2b2a2a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+.close-btn-post{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+.comments{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    overflow-y: scroll;
+    max-height: 10rem;
+}
+.comments .comment{
+    display: flex;
+    flex-direction: column;
+    background-color: #2b2a2a;
+}
+.red{
+    color: #ff0000;
+}

@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 const requestHandeler = async (endpoint,provider='web-e-fied') => {
-  console.log(`${import.meta.env.VITE_WEEB_E_FIED_API}/api/${endpoint}`)
   if(provider==='web-e-fied'){
     const res=await axios.get(`${import.meta.env.VITE_WEEB_E_FIED_API}/api/${endpoint}`);
     return res.data;
@@ -111,9 +110,7 @@ async function getAnimeInfo(id,provider){
 }
 
 
-
 async function getGenres(url){
-  console.log(url)
   const res=await axios.get(url);
   const genres=res.data.data;
   return genres.map(genre=>genre.attributes.name);

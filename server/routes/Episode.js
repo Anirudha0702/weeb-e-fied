@@ -8,7 +8,6 @@ router.get("/:episode",async(req,res)=>{
         try {
             const { data } = await axios.get(strikeURL,
                 { params: { server: "gogocdn" } });
-            console.log(data)
              res.status(200).json(data.sources)
         } catch (err) {
             console.log(err.message)

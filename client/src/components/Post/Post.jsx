@@ -9,10 +9,13 @@ import { useContext,useState} from 'react';
 import { Auth } from '../../Provider/AuthProvider';
 import disLike from '../../utils/dislike';
 import comment from '../../utils/comment';
-import { IoMdSend } from "react-icons/io";const Post = ({post})=> {
+import { IoMdSend } from "react-icons/io";
+import PostPortal from '../PostPortal/PostPortal';
+const Post = ({post})=> {
     const queryClient=useQueryClient()
     const {currentUser}=useContext(Auth)
     const [processing,setProcessing]=useState(false)
+    const [showPost,setShowPost]=useState(false);
     const [_comment,setComment]=useState('')
     const likePost=useMutation({
         mutationFn:async({postId,likeInfo})=>{return like(postId,likeInfo)},
@@ -33,7 +36,7 @@ import { IoMdSend } from "react-icons/io";const Post = ({post})=> {
         }
     })
     const handleLikeDislike=(e)=>{
-        e.preventDefault();
+        e.stopPropagation()
         setProcessing(!processing)
         if(processing) return
         const likeInfo={
@@ -60,7 +63,7 @@ import { IoMdSend } from "react-icons/io";const Post = ({post})=> {
         }
     }
     const handleComment=(e)=>{
-        e.preventDefault();
+        e.stopPropagation()
         console.log("cmt")
         const comment_obj={
             _commentId:uuid(),
@@ -87,20 +90,24 @@ import { IoMdSend } from "react-icons/io";const Post = ({post})=> {
       }
       
   return (
-    <div className="post">
-            <div className="author">
+    <>
+    {
+        showPost && <PostPortal post_id={post?._id} stateFn={setShowPost}/>
+    }
+    <div className="post" >
+            <div className="author" onClick={()=>setShowPost(true)}>
                 <div className="auther-image-wrapper">
                     <img src={post?.authorPhoto} alt="" className="auther-image"  referrerPolicy='no-referrer'/>
                 </div>
                 <h4 className="author-name">{post?.author}</h4>
                 
             </div>
-            <span className="post-body">
+            <span className="post-body" onClick={()=>setShowPost(true)}>
                 {post?.body}
             </span>
             
             <div className="post-actions">
-                <button className={`like action ${processing?'disable':''}`} onClick={e=>handleLikeDislike(e)}disabled={processing}><FcLike/>{post?.LikedBy?.length}</button>
+                <button className={`like action ${processing?'disable':''} ${post?.LikedBy?.some(element => element.likedBy === currentUser?.uid)?'red':''}`} onClick={e=>handleLikeDislike(e)}disabled={processing}><FcLike/>{post?.LikedBy?.length}</button>
                 <button className="comment action"><FaCommentAlt/>{post?.Comments?.length}</button>
                 <span className="created-at">{getFormattedDate(post?.createdAt)}</span>
             </div>
@@ -114,7 +121,7 @@ import { IoMdSend } from "react-icons/io";const Post = ({post})=> {
                 onChange={e=>setComment(e.target.value)}/>
                 <IoMdSend size={30} onClick={e=>handleComment(e)}/>
             </div>
-        </div>
+        </div></>
   )
 }
 
