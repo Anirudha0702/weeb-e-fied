@@ -14,7 +14,7 @@ export const getTopCharacters=async()=> {
       if (response.status === 429) {
         const secondsToWait = Number(response.headers.get("retry-after"))
         await new Promise(resolve => setTimeout(resolve, secondsToWait * 1000))
-        return getFeaturedAnime()
+        return getTopCharacters()
       }
       return response.data?.data;
 }
