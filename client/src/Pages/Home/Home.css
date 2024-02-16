@@ -1,0 +1,27 @@
+.section__wrapper{
+    display: grid;
+    grid-template-areas: "upcoming  toprated  favorites";
+    gap: 1rem;
+    padding: 0 0.5rem;
+}
+.section__wrapper .upcoming{
+    grid-area: upcoming;
+}
+.section__wrapper .toprated{
+    grid-area: toprated;
+}
+.section__wrapper .favorites{
+    grid-area: favorites;
+}
+@media screen and (max-width: 768px){
+    .section__wrapper{
+        grid-template-areas: "upcoming toprated" 
+        "favorites favorites";
+    }
+}
+@media screen and (max-width: 480px){
+    .section__wrapper{
+        grid-template-areas: "upcoming" "toprated" "favorites";
+    }
+    
+}

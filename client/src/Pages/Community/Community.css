@@ -23,11 +23,13 @@
     font-size: clamp(1.5rem, 5vw, 5rem);
 
 }
+
 .post-options{
     position: relative;
     display: flex;
     margin-block: 2rem;
     padding-inline: 1rem;
+    gap: 1rem;
 }
 .post-options ._option{
     position: relative;
@@ -38,7 +40,10 @@
     display: flex;
     justify-content: space-between;
     font-size: 1rem;
-    font-weight: 600;}
+    font-weight: 600;
+    color: #000;
+    background-color: #fff;
+}
 .create-post{
     background-color: #fff;
     border-radius: 20px;
@@ -59,4 +64,8 @@
     width: 100%;
     max-width: 60rem;
     flex-grow: 0;
+}
+.-opacity1-2{
+    opacity: 0.2;
+
 }

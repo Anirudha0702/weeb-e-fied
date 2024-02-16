@@ -1,27 +1,46 @@
 import './Community.css'
-import { useState } from 'react';
+import { useState,useEffect,useContext } from 'react';
 import Cover from '../../assets/community-header.jpg'
 import { GoPlus } from "react-icons/go";
-import { FcLike } from "react-icons/fc";
-import { FaRegHeart,FaCommentAlt } from "react-icons/fa";
 import TopCharacters from '../../components/TopCharacters/TopCharacters';
+import { IoIosArrowForward ,IoIosArrowBack} from "react-icons/io";
 import Post from '../../components/Post/Post';
-import getPosts from '../../Api/getPosts';
+import { getPosts } from '../../Api/weeb-e-fied';
 import {useInfiniteQuery,} from '@tanstack/react-query'
-import Modal from '../../components/Modal/Modal';
+import Modal from '../../components/CreatePost/Modal';
+import { Auth } from '../../Provider/AuthProvider';
+import { useNavigate } from "react-router-dom";
 const Community = () => {
+  const {currentUser}=useContext(Auth)
+  const navigate=useNavigate();
   const [open,setOpen]=useState(false)
- const {data,isLoading,isPending,isError,status}=useInfiniteQuery(
+  let [index,setIndex]=useState(0)
+  let curr=0
+  useEffect(() => {
+    document.title = `Profile | Weeb-e-fied`;
+    if (!currentUser) {
+      navigate("/");
+    }
+  }, [currentUser, navigate]);
+ const {data,isLoading,isPending,isError,status,fetchNextPage,hasNextPage,fetchPreviousPage,hasPreviousPage}=useInfiniteQuery(
     {
       queryKey:["posts"],
-      queryFn:getPosts,
-      getNextPageParam:(lastPage)=>{
-        if(lastPage?.totalPages===lastPage?.currentPage) return false;
-        return lastPage?.currentPage+1
-      }
+      queryFn:({pageParam=0})=>getPosts({pageparam:pageParam}),
+      getNextPageParam:(lastPage)=>{       
+        if(lastPage?.totalPages===lastPage?.currentPage) return undefined;
+        curr=1+lastPage?.currentPage
+        console.log(curr)
+        return 1+lastPage?.currentPage
+      },
+      getPreviousPageParam:(firstPage)=>{
+        if(firstPage?.currentPage===index) return undefined;
+        curr=index-1
+        console.log(curr)
+        return index-1
     }
-  
+    }
  )
+ console.log(hasNextPage,hasPreviousPage,index,curr)
 if(isLoading || isPending){
     return <div>Loading...</div>
 }
@@ -43,18 +62,18 @@ if(isError || status==="idle" ){
             Create Post
             <GoPlus className="plus-icon" />
         </button>
-        <button className="All  _option">
-            All
+        <button className={`my-posts  _option ${!hasPreviousPage?"opacity-1-2":""}`} disabled={!hasPreviousPage} onClick={()=>{fetchPreviousPage();setIndex(curr)}}>
+        <IoIosArrowBack />
         </button>
-        <button className="my-posts  _option">
-            My Posts
+        <button className={`my-posts  _option ${!hasNextPage?"opacity-1-2":""}`} onClick={()=>{fetchNextPage();setIndex(curr)}} disabled={!hasNextPage}>
+        <IoIosArrowForward />
         </button>
         {
           open && <Modal close={setOpen}/>
         }
     </div>
       {
-        data?.pages[0]?.data?.map((post)=><Post post={post} key={post?._id}/>)
+        data?.pages[index]?.data?.map((post)=><Post post={post} key={post?._id}/>)
       }
         </div>
         <TopCharacters/>

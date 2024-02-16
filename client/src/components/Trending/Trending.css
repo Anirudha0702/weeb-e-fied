@@ -14,6 +14,8 @@
     color:#ffdd95;
     font-size:clamp(2rem, 1.5vw, 2.2rem);
     font-weight: 600;
+    font-family: "Space Mono", monospace;
+    font-style: normal;
 }
 .arraow__wrapper{
     position: absolute;

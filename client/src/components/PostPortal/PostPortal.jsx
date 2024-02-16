@@ -1,20 +1,16 @@
 import PropTypes from 'prop-types'
 import ReactDom from 'react-dom'
 import './PostPortal.css'
-import comment from '../../utils/comment';
 import { IoMdSend } from "react-icons/io";
 import { FcLike } from "react-icons/fc";
 import { FaCommentAlt } from "react-icons/fa";
 import {useMutation,useQueryClient,useQuery} from '@tanstack/react-query'
-import like from '../../utils/like'
 import { useContext,useState} from 'react';
 import { Auth } from '../../Provider/AuthProvider';
-import disLike from '../../utils/dislike';
 import { v4 as uuid } from 'uuid';
-import getPost from '../../Api/getPost';
+import {getPost,like,comment,disLike} from '../../Api/weeb-e-fied.js';
 import { MdOutlineCancel } from "react-icons/md";
 const PostPortal = ({post_id,stateFn}) => {
-  console.log(stateFn)
   const queryClient=useQueryClient()
   const {currentUser}=useContext(Auth)
   const [processing,setProcessing]=useState(false)

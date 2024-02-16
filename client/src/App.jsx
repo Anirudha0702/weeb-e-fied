@@ -1,6 +1,6 @@
 
 import './App.css'
-import Home from './Pages/Home'
+import Home from './Pages/Home/Home'
 import RouteProvider from './Provider/RouteProvider'
 
 

@@ -5,10 +5,10 @@ import Logo from "../../assets/de.png"
 import {FaUserAlt} from 'react-icons/fa'
 import {AiFillSetting,AiFillHeart} from 'react-icons/ai'
 import {LuLogOut} from 'react-icons/lu'
-import {signInWithPopup} from 'firebase/auth';
-import {auth,provider} from '../../utils/firebase'
 import "./Nav.css"
 import { Auth } from "../../Provider/AuthProvider";
+import signIn from "../../utils/signIn";
+import signout from "../../utils/signOut";
 const Nav = () => {
     const {currentUser}=useContext(Auth)
     const [search,setSearch]=useState("")
@@ -22,7 +22,7 @@ const Nav = () => {
         objectFit:"cover"
     }
     const handleSignIn=async()=>{
-        const res= await signInWithPopup(auth, provider);
+        const res= await signIn();
     }
     const handleSearch=(e)=>{
         navigate(`/search/${search}`)
@@ -71,10 +71,10 @@ const Nav = () => {
                             </span>
                             <span>{currentUser.email}</span>
                             <ol>
-                                <li className="option" onClick={()=>{navigate(`/user/${currentUser?.uid}`)}}><FaUserAlt/>Profile</li>
+                                <li className="option" onClick={()=>{navigate(`/user/`)}}><FaUserAlt/>Profile</li>
                                 <li className="option" onClick={()=>{navigate(`/user/${currentUser?.uid}/watchlist`)}}><AiFillHeart/>WatchList</li>
                                 <li className="option"><AiFillSetting/>Settings</li>
-                                <li className="option"><LuLogOut/>Logout</li>
+                                <li className="option" onClick={async()=>{await signout()}}><LuLogOut/>Logout</li>
                             </ol>
                         </div>
                     }

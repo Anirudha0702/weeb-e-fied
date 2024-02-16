@@ -3,7 +3,7 @@ import { RxCross2 } from "react-icons/rx";
 import ReactDom from 'react-dom'
 import { useContext, useState } from 'react';
 import {useMutation, useQueryClient} from '@tanstack/react-query'
-import createPost from '../../Api/createPost';
+import {createPost} from '../../Api/weeb-e-fied';
 import { Auth } from '../../Provider/AuthProvider';
 const Modal = ({close}) => {
   const {currentUser}=useContext(Auth)

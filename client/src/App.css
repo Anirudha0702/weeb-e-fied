@@ -31,5 +31,8 @@ button{
 }
 body{
   background-color: #000000db;
+  /* background-image: url("./assets/watch_bg.png");
+  background-size: cover;
+  background-attachment: fixed; */
   width: 100%;
 }

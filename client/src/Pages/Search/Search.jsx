@@ -6,7 +6,8 @@ import './Search.css'
 import SearchError from "../../components/Errors/SearchError/SearchError"
 const Search = () => {
   const param=useParams()
-  const search=useSearch(param?.key,'jikan')
+  const provider=param?.provider || 'kitsu'
+  const search=useSearch(param?.key,provider)
   if(search.error){
     console.log(search.error)
       return <div className="search__animes" style={{height:'90svh'}}>
@@ -19,26 +20,36 @@ if(search.isLoading || search.isPending){
     </div>
 }
 return (
-<div className="search__animes" data-key={param?.key} data-found={search?25:0}>
+<div className="search__animes" data-key={param?.key} data-found={search?search.length:0}>
     {
         search?.map((anime,idx)=>{
+            let id,title,imagge
+            if(provider==='jikan'){
+
+                id=anime.mal_id
+                title= anime.title || 
+                anime.title_english || 
+                anime.title_japanese || null
+                imagge=anime.images.jpg.image_url || 
+                anime.images.jpg.small_image_url || 
+                anime.images.jpg.large_image_url || null
+            }
+            if(provider==='kitsu'){
+                id=anime.id
+                title=anime.attributes.titles.en || 
+                anime.attributes.titles.en_jp || 
+                anime.attributes.titles.ja_jp || null
+                imagge=anime.attributes.posterImage.original || 
+                anime.attributes.posterImage.large || 
+                anime.attributes.posterImage.medium || null
+            }
             return(
-                <Link to={`/details/${anime.mal_id}?provider=jikan`} key={idx}>
+                <Link to={`/details/${id}?provider=${provider}`} key={idx}>
                     <div className="search__anime" key={idx}>
                     <img 
-                    src={
-                        anime.images.jpg?.image_url || anime.images.jpg?.small_image_url || anime.images.jpg?.large_image_url || null
-                        } 
-                    alt={
-                        anime.title || 
-                        anime.title_english || 
-                        anime.title_japanese || null
-                        }/>
-                    <h3>{
-                            anime.title || 
-                            anime.title_english || 
-                            anime.title_japanese || null
-                        }</h3>
+                    src={imagge} 
+                    alt={title}/>
+                    <h3>{title}</h3>
                 </div>
                 </Link>
             )

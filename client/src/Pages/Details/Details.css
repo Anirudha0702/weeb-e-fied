@@ -85,6 +85,9 @@ options:focus,options:focus-visible,options:active{
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+    width: 50%;
 }
 ._details{
     width: 10rem;

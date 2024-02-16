@@ -61,9 +61,9 @@ const Hero = () => {
                                 </span>
                               </span>
                             </div>
-                            <p className="description">
-                            {(details.background && details.background.slice(0, 200) + "...") ||
-                              (details.synopsis && details.synopsis.slice(0, 200) + "...")}
+                            <p className="hero-description">
+                            {details.background && details.background ||
+                              details.synopsis && details.synopsis}
                           </p>
                           <div className="button__wrapper">
                             <Link to={`/watch/${details.titles.en_jp || details.titles.en}`} style={{padding:0}}>

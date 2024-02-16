@@ -13,7 +13,7 @@ const Watch = () => {
     document.title = `${param.name} | Weeb-e-fied`;
   },[param.name]);
   
-  const anime=useSearch(param.name);
+  const anime=useSearch(param.name,"weeb-e-fied");
   const animeId=anime[0]?.id;
   const lastEp=localStorage.getItem(`${animeId}`);
   const [selectedEpisode, setSelectedEpisode] = useState(lastEp||'1');

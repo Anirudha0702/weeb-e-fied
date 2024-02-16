@@ -1,19 +1,13 @@
 .footer{
     position: relative;
-    padding-top: 3rem;
+    padding-top: 2rem;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     color: #fff;
-    background: url('https://wallpaperset.com/w/full/5/7/2/19074.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    filter: grayscale(100%);
     height: 20svh;
-    background-attachment: fixed;
 }
 .footer::after{
     content: '';

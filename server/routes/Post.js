@@ -31,6 +31,7 @@ router.put("/like/:id",async(req,res)=>{
         
     }catch(err){
         console.log(err)
+        res.status(500).json(err.message||"error occured ");
     }
 })
 router.put("/dislike/:id",async(req,res)=>{
@@ -46,7 +47,10 @@ router.put("/dislike/:id",async(req,res)=>{
             
         );
         res.status(200).json(updatedPost);
-    }catch(err){}
+    }catch(err){
+        res.status(500).json(err.message||"error occured ");
+
+    }
 })
 router.put('/comment/:id',async(req,res)=>{
     console.log(req.body)
@@ -62,11 +66,11 @@ router.put('/comment/:id',async(req,res)=>{
         );
         res.status(200).json(updatedPost);
     }catch(err){
-        res.status(500).json(err);
+        res.status(500).json(err.message||"error occured ");
     }
 })
 router.get("/find/all",async(req,res)=>{
-    const page = req.query.page||0;
+    const page = parseInt(req.query.page)||0;
     const limit=10;
     const c=await Post.countDocuments();
     console.log(req.query)

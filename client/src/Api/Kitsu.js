@@ -58,8 +58,8 @@ export async function getAnimeInfo(id,provider){
   return {
     id:id,
     title:info.data.attributes.titles.en || info.data.attributes.titles.en_jp || info.data.attributes.titles.ja_jp,
-    poster_image:info.data.attributes.posterImage.original || info.data.attributes.posterImage.large || info.data.attributes.posterImage.medium || null,
-    cover_image:info.data.attributes.coverImage.original || info.data.attributes.coverImage.large || info.data.attributes.coverImage.medium || null,
+    poster_image:info.data.attributes.posterImage?.original || info.data.attributes.posterImage.large || info.data.attributes.posterImage.medium || null,
+    cover_image:info.data.attributes?.coverImage?.original || info.data.attributes.coverImage?.large || info.data.attributes.coverImage?.medium || null,
     description:info.data.attributes.description || info.data.attributes.synopsis || null,
     status:info.data.attributes.status,
     rating:parseFloat(info.data.attributes.averageRating/10).toFixed(2),

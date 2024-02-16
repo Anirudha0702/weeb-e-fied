@@ -3,12 +3,11 @@ import './Post.css'
 import { FcLike } from "react-icons/fc";
 import { FaCommentAlt } from "react-icons/fa";
 import {useMutation,useQueryClient} from '@tanstack/react-query'
-import like from '../../utils/like'
+import { like,comment,disLike} from '../../Api/weeb-e-fied.js';
 import { v4 as uuid } from 'uuid';
 import { useContext,useState} from 'react';
 import { Auth } from '../../Provider/AuthProvider';
-import disLike from '../../utils/dislike';
-import comment from '../../utils/comment';
+
 import { IoMdSend } from "react-icons/io";
 import PostPortal from '../PostPortal/PostPortal';
 const Post = ({post})=> {

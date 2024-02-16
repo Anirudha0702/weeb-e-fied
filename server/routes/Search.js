@@ -7,7 +7,7 @@ router.get('/:anime',async(req,res)=>{
         const {data}=await axios.get(strikeURL);
         res.status(200).json(data.results);
     } catch (error) {
-        return error
+        res.status(500).json({message:error.message});
     }
     
 })

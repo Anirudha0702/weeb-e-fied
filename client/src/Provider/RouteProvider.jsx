@@ -1,5 +1,5 @@
 import { RouterProvider,createBrowserRouter,Outlet } from "react-router-dom";
-import Home from "../Pages/Home";
+import Home from "../Pages/Home/Home";
 import Watch from "../Pages/Watch/Watch";
 import Nav from "../components/Nav/Nav";
 import Details from "../Pages/Details/Details";
@@ -28,7 +28,7 @@ const router=createBrowserRouter(
                     element:<Home/>
                 },
                 {
-                    path:"/user/:id",
+                    path:"/user/",
                     element:<Profile/>
                 },
                 {

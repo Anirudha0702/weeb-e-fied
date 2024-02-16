@@ -8,6 +8,7 @@ import { BiError } from "react-icons/bi";
 const VideoPlayer = ({episodeId,isLoading}) => {
   const[quality, setQuality] = useState('default');
   const stream=useStream(episodeId); 
+  console.log(stream)
   const[videoUrl, setVideoUrl] = useState("");
   const video_Ref=useRef(null);
   const [seekTo,setSeekTo]=useState(localStorage.getItem(`${episodeId}`)||0);
