@@ -19,12 +19,14 @@ const WatchStatus = ({
   const ref= useRef(null)
   useEffect(()=>{
     const fetchData = async () => {
-        const res = await getStatus(currentUser.uid,`${id}__${provider}`);
+        if(currentUser){
+          const res = await getStatus(currentUser.uid,`${id}__${provider}`);
         setCurrentStatus(res.status); 
+        }
   
     };
     fetchData();
-  },[currentUser.uid, id, provider])
+  },[currentUser, id, provider])
   const handleAddList = async () => {
     if (!currentUser) {
       await signIn();

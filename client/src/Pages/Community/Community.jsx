@@ -40,7 +40,7 @@ const Community = () => {
     }
     }
  )
- console.log(hasNextPage,hasPreviousPage,index,curr)
+
 if(isLoading || isPending){
     return <div>Loading...</div>
 }

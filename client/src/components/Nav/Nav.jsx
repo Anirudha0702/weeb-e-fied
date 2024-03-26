@@ -21,7 +21,7 @@ const Nav = () => {
   };
   return (
     <nav className="h-16 flex bg-base-200 items-center gap-2 justify-between px-2">
-      <Link to={"/"}>
+      <Link to={"/"} className=" hidden sm:block">
         <div className="w-16 aspect-square relative">
           <img
             src={Logo}
@@ -59,9 +59,9 @@ const Nav = () => {
       </label>
 
       {currentUser !== null ? (
-        <div className="flex gap-2 relative">
-          <Link to={"/community"}>
-            <BsWechat size={45} />
+        <div className="flex gap-2 relative items-center">
+          <Link to={"/community"} className="hidden sm:block">
+            <BsWechat size={40} />
           </Link>
           <div className="dropdown dropdown-bottom dropdown-end">
             <div
@@ -80,8 +80,9 @@ const Nav = () => {
               tabIndex={0}
               className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
             >
+              <li className="py-2  flex items-center gap-2 cursor-pointer ">{currentUser?.displayName}</li>
               <li
-                className="py-2  flex items-center gap-2 cursor-pointer "
+                className="py-2  flex  gap-2 cursor-pointer "
                 onClick={() => {
                   navigate(`/user/`);
                 }}
@@ -92,7 +93,7 @@ const Nav = () => {
                 </span>
               </li>
               <li
-                className="py-2 px-4 flex items-center gap-2 cursor-pointer "
+                className="py-2  flex  gap-2 cursor-pointer "
                 onClick={() => {
                   navigate(`/user/${currentUser?.uid}/watchlist`);
                 }}
@@ -102,14 +103,24 @@ const Nav = () => {
                   WatchList
                 </span>
               </li>
-              <li className="py-2 px-4 flex items-center gap-2 cursor-pointer ">
+              <li className="py-2   sm:hidden  gap-2 cursor-pointer flex "
+              onClick={() => {
+                navigate(`/community/`);
+              }}>
+                <span>
+                
+            <BsWechat />Community
+    
+                </span>
+              </li>
+              <li className="py-2  flex  gap-2 cursor-pointer ">
                 <span>
                   <AiFillSetting className="" />
                   Settings
                 </span>
               </li>
               <li
-                className="py-2 px-4 flex items-center gap-2 cursor-pointer "
+                className="py-2  flex  gap-2 cursor-pointer "
                 onClick={async () => {
                   await signout();
                 }}

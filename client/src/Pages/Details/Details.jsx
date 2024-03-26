@@ -11,7 +11,7 @@ const Details = () => {
   const [query, setQuery] = useSearchParams();
 
   const info = useAnimeById(param.name, query.get("provider"));
-  console.log(info)
+  
   
   const { id, title, poster_image, totalEps, showType, ageRating,provider } =info?.data??{};
   if (info.isLoading || info.isPending)

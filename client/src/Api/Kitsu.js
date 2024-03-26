@@ -3,7 +3,27 @@ import TopAnimes from '../Data/TopAnimes';
 export async function getRecentAnimes(){
     try{
       const res=await axios.get(`${import.meta.env.VITE_KITSU_API}/anime?filter[status]=current&page[limit]=8&sort=-averageRating`)
-      return res.data;      
+      let data=[];
+     res.data.data.forEach(anime=>{
+        data.push({
+          id:anime.id,
+          title:anime.attributes?.titles?.en || anime.attributes?.titles?.en_jp,
+          subType:anime.attributes?.subtype||null,
+          episodeLength:anime.attributes?.episodeLength||null,
+          poster:anime.attributes?.posterImage?.original||
+          anime.attributes?.posterImage?.large||
+          anime.attributes?.posterImage?.tiny||
+          anime.attributes?.posterImage?.small,
+          rating:anime.attributes?.averageRating,
+          type:anime.attributes?.showType,
+          episodeCount:anime.attributes?.episodeCount||null,
+          startDate:anime.attributes?.startDate,
+          ageRating:anime.attributes?.ageRating,
+          synopsis:anime.attributes?.synopsis||null,
+          background:anime.attributes?.background||null
+        })
+     })
+       return data;      
     }
     catch(error){
       return { TopAnimes };
