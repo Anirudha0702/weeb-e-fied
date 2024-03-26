@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-*,*::before,
+/* *,*::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
@@ -38,7 +41,7 @@ a,a:hover,a:active,a:visited{
 body{
   background-color: #000000db;
   width:100%;
-}
+} */
 ::-webkit-scrollbar {
   width: 10px;
 }
