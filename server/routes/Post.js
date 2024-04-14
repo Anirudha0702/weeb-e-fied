@@ -1,4 +1,5 @@
 const router=require("express").Router();
+const { Cursor } = require("mongoose");
 const Post = require("../Models/Post");
 router.post("/create",async(req,res)=>{
     console.log(req.body)
@@ -72,7 +73,7 @@ router.put('/comment/:id',async(req,res)=>{
 router.get("/find/all",async(req,res)=>{
     const page = parseInt(req.query.page)||0;
     const limit=10;
-    const c=await Post.countDocuments();
+    const totalDocs=await Post.countDocuments();
     console.log(req.query)
     try{
         const posts = await Post.find()
@@ -82,9 +83,8 @@ router.get("/find/all",async(req,res)=>{
         res.status(200).json({
             data:posts,
             count:posts.length,
-            totalPages:Math.ceil(c/limit)-1,
-
-            currentPage:page
+            hasNext:totalDocs>(page+1)*limit,
+            CurrentPage:page,
         });
     }catch(err){
         res.status(500).json(err);

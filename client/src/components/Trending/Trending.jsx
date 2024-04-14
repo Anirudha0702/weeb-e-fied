@@ -38,7 +38,7 @@ const Trending = () => {
     </div>
     }
   return (
-    <div className="trending__wrapper">
+    <div className="mt-20 flex relative h-[15rem] md:h-[20rem] xl:h-[30vw] max-h-[20rem] xl:max-h-[30vw]">
         <div className="arraow__wrapper">
             <GrNext className="arrow__icon" onClick={btnpressnext} />
             <GrPrevious className="arrow__icon" onClick={btnpressprev}/>

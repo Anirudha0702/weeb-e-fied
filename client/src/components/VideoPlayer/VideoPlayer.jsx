@@ -7,8 +7,7 @@ import { useStream } from "../../hooks/useHooks";
 import { BiError } from "react-icons/bi";
 const VideoPlayer = ({episodeId,isLoading}) => {
   const[quality, setQuality] = useState('default');
-  const stream=useStream(episodeId); 
-  console.log(stream)
+  const stream=useStream(episodeId);
   const[videoUrl, setVideoUrl] = useState("");
   const video_Ref=useRef(null);
   const [seekTo,setSeekTo]=useState(localStorage.getItem(`${episodeId}`)||0);
@@ -22,8 +21,8 @@ const VideoPlayer = ({episodeId,isLoading}) => {
     }
   },[episodeId, seekTo,quality])
   useEffect(() => {
-    if(stream.data){
-      const url=stream.data?.find((file)=>file.quality===quality)?.url;
+    if(stream.data?.data){
+      const url=stream.data?.data.find((file)=>file.quality===quality)?.url;
       setVideoUrl(url);
     }
   }, [quality,stream.data]);
@@ -42,8 +41,8 @@ const VideoPlayer = ({episodeId,isLoading}) => {
     </div>
   }
   return (
-    <div className="component__wrapper">
-    <div className="player__wrappper" >
+    <div className="relative flex flex-col h-full overflow-hidden gap-2 bg-black my-2">
+    <div className="relative w-full h-[90%] " >
     {
       ReactPlayer.canPlay(videoUrl)  ? (
         <ReactPlayer 
@@ -67,18 +66,19 @@ const VideoPlayer = ({episodeId,isLoading}) => {
 }
     </div>
    
-    <div className="quality__wrapper" style={{color:"#fff"}}>
+    <div className="flex gap-1 items-center px-4 " >
       <div className="quality__title">Quality : </div>
-      <span className="quality__buttons">
+      <span className="flex gap-2 flex-wrap">
           {
-          stream.data?.map((file, idx) => (
+          stream.data?.data.map((file, idx) => (
             <button
               onClick={() => setQuality(file.quality)}
-              className={`quality__button ${file.quality === quality && "active"}`}
+              className={`text-sm md:text-xl bg-white border-none px-2 py-1 text-black  ${file.quality === quality && "bg-yellow-500"}`}
               key={idx}
             >
               {file.quality}
             </button>
+            
            ))
           }
       </span>

@@ -3,8 +3,12 @@ import { Link, useParams } from "react-router-dom"
 import { useSearch } from "../../hooks/useHooks"
 import Spinner from "../../components/Loaders/Spinner/Spinner"
 import './Search.css'
+import { useState } from "react"
+
+// https://kitsu.io/api/edge/anime?sort=-userCount&page[limit]=8
 import SearchError from "../../components/Errors/SearchError/SearchError"
 const Search = () => {
+const [page,setPage]=useState(1)
   const param=useParams()
   const provider=param?.provider || 'kitsu'
   const search=useSearch(param?.key,provider)

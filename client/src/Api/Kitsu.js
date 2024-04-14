@@ -69,7 +69,7 @@ export async function getMostFavoritedAnimes(){
 
 }
 export async function searchByName(name){
-  const res=await axios.get(`${import.meta.env.VITE_KITSU_API}/anime?filter[text]=${name}`);
+  const res=await axios.get(`${import.meta.env.VITE_KITSU_API}/anime?filter[text]=${name}&page[size]=15`);
   return res.data?.data;
 }
 export async function getAnimeInfo(id,provider){

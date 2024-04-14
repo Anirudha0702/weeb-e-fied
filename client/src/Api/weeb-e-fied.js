@@ -13,6 +13,7 @@ export async function searchByName(name) {
   return res.data;
 }
 export async function getAnimeInfo(id) {
+  if(id==='error') throw new Error('Invalid ID');
   const res = await axios.get(
     `${import.meta.env.VITE_WEEB_E_FIED_API}/api/info/${id}`
   );

@@ -7,19 +7,9 @@
     justify-content: center;
     gap: 1rem;
     flex-wrap: wrap;
-    margin-block: 7rem;
 
 }
-.search__animes::after{
-    content: 'Search Results for 'attr(data-key)' found 'attr(data-found)' results';
-    position: absolute;
-    top: -3rem;
-    left: 1rem;
-    display: block;
-    color:#ffdd95;
-    font-size:clamp(2rem, 1.5vw, 2.2rem);
-    font-weight: 600;
-}
+
 .search__anime{
     position: relative;
     width: clamp(13rem, 15vw, 20rem);

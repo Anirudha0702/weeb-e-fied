@@ -3,7 +3,6 @@ import { getAnimeInfo, getMostFavoritedAnimes, getTopRatedAnimes, getUpcomingAni
 import { getStreamingLinks, searchByName as weebSearch,getAnimeInfo as weebInfo } from "../Api/weeb-e-fied";
 import { getUserAnimeList } from "../utils/watchListMethods";
 export function useSearch(name,provider) {
-  console.log(name,provider)
     const query= useQuery(
         {
             queryKey:["search", name], 
@@ -36,7 +35,8 @@ export function useInfo(animeId) {
     data:query.data,
     isLoading:query.isLoading,
     isPending:query.isPending,
-    isError:query.isError
+    isError:query.isError,
+    error:query.error
   };
 }
 export function useStream(episodeId){
