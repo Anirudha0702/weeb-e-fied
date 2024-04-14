@@ -1,5 +1,5 @@
 import "./Community.css";
-import { useState, useEffect, useContext } from "react";
+import {  useEffect, useContext } from "react";
 import Cover from "../../assets/community-header.jpg";
 import { GoPlus } from "react-icons/go";
 import TopCharacters from "../../components/TopCharacters/TopCharacters";
@@ -12,7 +12,6 @@ import AllPosts from "../../components/AllPosts/AllPosts";
 const Community = () => {
   const { currentUser } = useContext(Auth);
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
   useEffect(() => {
     if (!currentUser) {
       navigate("/");
