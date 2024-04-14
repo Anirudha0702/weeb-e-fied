@@ -2,10 +2,7 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/api",
-      "headers": {
-        "Access-Control-Allow-Origin":"https://weeb-e-fied.netlify.app"
-      }
+      "destination": "/api"
     }
   ]
 }
