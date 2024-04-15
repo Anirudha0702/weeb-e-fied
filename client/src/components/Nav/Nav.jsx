@@ -78,7 +78,7 @@ const Nav = () => {
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+              className="dropdown-content z-[100] menu p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li className="py-2  flex items-center gap-2 cursor-pointer ">{currentUser?.displayName}</li>
               <li
