@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAnimeInfo, getMostFavoritedAnimes, getTopRatedAnimes, getUpcomingAnimes, searchByName as kitsuSearch} from "../Api/Kitsu";
+import { getAnimeInfo, getMostFavoritedAnimes, getPopularSearches, getTopRatedAnimes, getUpcomingAnimes, searchByName as kitsuSearch} from "../Api/Kitsu";
 import { getStreamingLinks, searchByName as weebSearch,getAnimeInfo as weebInfo } from "../Api/weeb-e-fied";
 import { getUserAnimeList } from "../utils/watchListMethods";
 export function useSearch(name,provider) {
@@ -22,6 +22,16 @@ export function useSearch(name,provider) {
               };
           }
           return query.data;
+}
+export function GetPopularSearches(){
+  const query=useQuery({
+    queryKey:["popular-searches"],
+    queryFn:async ()=>{
+      return getPopularSearches()
+    }
+  })
+  return query;
+
 }
 export function useInfo(animeId) {
   const query=useQuery({

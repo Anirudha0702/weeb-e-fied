@@ -68,9 +68,9 @@ export async function getMostFavoritedAnimes(){
   }
 
 }
-export async function searchByName(name){
-  const res=await axios.get(`${import.meta.env.VITE_KITSU_API}/anime?filter[text]=${name}&page[size]=15`);
-  return res.data?.data;
+export async function searchByName(name,page){
+  const res=await axios.get(`${import.meta.env.VITE_KITSU_API}/anime?filter[text]=${name}&page[number]=${page}&page[size]=15`);
+  return res.data;
 }
 export async function getAnimeInfo(id,provider){
   const res= await axios.get(`${import.meta.env.VITE_KITSU_API}/anime/${id}`)
@@ -97,7 +97,15 @@ async function getGenres(url){
   const genres=res.data.data;
   return genres.map(genre=>genre.attributes.name);
 }
-
+export async function getPopularSearches(){
+  try{
+    const res=await axios.get(`${import.meta.env.VITE_KITSU_API}/anime?sort=-userCount&page[limit]=8`)
+    return res.data.data;      
+  }
+  catch(error){
+    return { TopAnimes };
+  }
+}
 // Upcoming Animes
 // https://kitsu.io/api/edge/anime?filter[status]=upcoming
 // Top Rating

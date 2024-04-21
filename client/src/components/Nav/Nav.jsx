@@ -95,7 +95,7 @@ const Nav = () => {
               <li
                 className="py-2  flex  gap-2 cursor-pointer "
                 onClick={() => {
-                  navigate(`/user/${currentUser?.uid}/watchlist`);
+                  navigate(`/watchlist`);
                 }}
               >
                 <span>

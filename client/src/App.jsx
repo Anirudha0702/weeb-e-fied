@@ -1,17 +1,14 @@
-
-import './App.css'
-import Home from './Pages/Home/Home'
-import RouteProvider from './Provider/RouteProvider'
-
-
+import "./App.css";
+import Home from "./Pages/Home/Home";
+import RouteProvider from "./Provider/RouteProvider";
 
 function App() {
-
   return (
     <RouteProvider>
-      <Home/>
+      <Home />
+     
     </RouteProvider>
-  )
+  );
 }
 
-export default App
+export default App;
