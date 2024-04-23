@@ -1,21 +1,14 @@
 import { useContext, useEffect, useState, useRef } from "react";
 import getUser from "../../utils/getUser";
-import "./Profile.css";
 import { Auth } from "../../Provider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { MdVerified } from "react-icons/md";
 import Spinner from "../../components/Loaders/Spinner/Spinner";
-import { useUserList } from "../../hooks/useHooks";
-import { BsThreeDots } from "react-icons/bs";
 const Profile = () => {
   const { currentUser } = useContext(Auth);
   const navigate = useNavigate();
-  const [option, setOption] = useState("All");
   const [user, setUser] = useState({});
-  const ref = useRef(null);
   const [loading, setLoading] = useState(true);
-  const { data, isLoading, isError } = useUserList(currentUser.uid, option);
-
   useEffect(() => {
     document.title = `Profile | Weeb-e-fied`;
     if (!currentUser) {
@@ -34,26 +27,9 @@ const Profile = () => {
       user();
     }
   }, [currentUser]);
-
-  const onOptionChangeHandler = async (event) => {
-    ref.current.disabled = true;
-    const val = event.target.value;
-    ref.current.disabled = false;
-    setOption(val);
-  };
-
-  const handleClcik = (e) => {
-    const target = e.target;
-    if (target.classList.contains("nav-item")) {
-      const items = target.parentElement.children;
-      for (let i = 0; i < items.length; i++) {
-        items[i].classList.remove("active");
-      }
-      target.classList.add("active");
-      setOption(target.textContent);
-    }
-  };
-
+  const goToSetting=()=>{
+    navigate("/settings")
+  }
   if (loading) {
     return (
       <div className="hero">
@@ -63,82 +39,66 @@ const Profile = () => {
   }
 
   return (
-    <div className="profile">
-      <div className="cover-image-wrapper">
-        <img src={user?.coverURL} alt="cover" />
-      </div>
-      <div className="profile-wrapper">
-        <div className="profile-section">
-          <div className="profile-image-wrapper">
-            <img src={user?.photoURL} alt="" className="profile-image" />
-          </div>
-        </div>
-        <div className="info-wrapper">
-          <h1>
-            {user?.displayName} <MdVerified style={{ color: "#5eff00" }} />
-          </h1>
-          <p>{user?.email} </p>
-          <p>joined Since: {user?.createdAt?.toDate().toDateString()}</p>
-        </div>
-      </div>
-      <nav className="watchlist-nav">
-        <ul onClick={(e) => handleClcik(e)}>
-          <li className="nav-item active">All</li>
-          <li className="nav-item">Watching</li>
-          <li className="nav-item">Completed</li>
-          <li className="nav-item">Dropped</li>
-          <li className="nav-item">Planned</li>
-          <li className="nav-item">On-Hold</li>
-        </ul>
-      </nav>
-      <select
-        name=""
-        id=""
-        value={option}
-        ref={ref}
-        className="mob-watchlist-nav"
-        onChange={onOptionChangeHandler}
+    <div className="min-h-[80svh]">
+      <div
+        className="hero h-[10rem] md:h-[15rem] "
+        style={{
+          backgroundImage: `url(${user?.coverURL})`,
+        }}
       >
-        <option value="All">All</option>
-        <option value="Watching">Watching</option>
-        <option value="Completed">Completed</option>
-        <option value="Dropped">Dropped</option>
-        <option value="Planned">Planned</option>
-        <option value="On-Hold">On-Hold</option>
-      </select>
-      <div className="watchlist-animes">
-        {isLoading && (
-          <div className="hero">
-            <Spinner />
+        <div className="hero-overlay bg-opacity-70 h-[10rem] md:h-[15rem] "></div>
+        <div className="hero-content text-center text-neutral-content">
+          <div className="max-w-md">
+            <h1 className="mb-5 text-5xl font-bold">
+            Konnichiwa! {currentUser?.displayName?.split(" ")[0]}
+            </h1>
+            <p className="mb-5">
+            Step into otaku world, where every frame tells a story, and every character captures our hearts.
+            </p>
           </div>
-        )}
-        {isError && (
-          <h1 style={{ textAlign: "center", marginTop: "2rem" }}>
-            Something went wrong
-          </h1>
-        )}
-        {data?.length > 0 ? (
-          data?.map((anime) => (
-            <div className="watchlist-anime" key={anime.id}>
-              <div className="poster-wrapper">
-                <img src={anime.poster_image} alt="" />
-                <p className="age_rating_">{anime.ageRating}</p>
-                <span className="episode__count__">
-                  CC:{anime.totalEps || "Unknown"}
-                </span>
-              </div>
-              <BsThreeDots className="three-dots" />
-              <div className="watchlist-anime-info">
-                <h4>{anime.title}</h4>
-                <p>{anime.showType}</p>
-              </div>
+        </div>
+      </div>
+      <h1 className="my-4 text-center text-5xl font bold">Profile</h1>
+      <div className="mx-auto w-full max-w-[40rem]   h-fit flex flex-col items-center justify-center md:grid md:grid-cols-[3fr_1fr] gap-4 bg-gray-700 my-12">
+        
+        <div className="w-full lex flex-col items-center justify-center  p-4 gap-2 md:bg-gray-800">
+          <label className="form-control w-full ">
+            <div className="label">
+              <span className="text-base  font-bold ">Username</span>
             </div>
-          ))
-        ) : (
-          <h1 style={{ textAlign: "center", marginTop: "2rem" }}>
-            No Anime Found
-          </h1>
-        )}
+            <input
+              type="text"
+              value={user?.displayName}
+              className="input input-bordered w-full  cursor-text bg-white text-gray-600"
+            />
+          </label>
+          <label className="form-control w-full">
+            <div className="label">
+              <span className="text-base font-bold ">Email</span>
+            </div>
+            <input
+              type="text"
+              value={user?.email}
+              className="input input-bordered w-full  cursor-text bg-white  text-gray-600"
+            />
+          </label>
+          <label className="form-control w-full">
+            <div className="label">
+              <span className="text-base font-bold ">Joined</span>
+            </div>
+            <input
+              type="text"
+              value={user?.createdAt?.toDate().toDateString()}
+              className="input input-bordered w-full  cursor-text bg-white  text-gray-600"
+            />
+          </label>
+          <button className="btn btn-wide mx-auto flex mt-4 bg-" onClick={goToSetting}>Edit Profile</button>
+        </div>
+        <div className="avatar  order-1   ">
+          <div className="w-24 rounded-full">
+            <img src={user?.photoURL} />
+          </div>
+        </div>
       </div>
     </div>
   );

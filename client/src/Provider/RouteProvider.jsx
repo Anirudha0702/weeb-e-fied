@@ -54,6 +54,10 @@ const router=createBrowserRouter(
                     element:<WatchList/>
                 },
                 {
+                    path:'/settings',
+                    element:"<h1>Settings</h1>"
+                },
+                {
                     path:'*',
                     element:<h1>404 Not Found</h1>
                 
