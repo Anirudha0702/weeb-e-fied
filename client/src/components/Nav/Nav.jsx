@@ -1,6 +1,6 @@
 import { BsWechat } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext,  useState } from "react";
 import Logo from "../../assets/de.png";
 import { FaUserAlt } from "react-icons/fa";
 import { AiFillSetting, AiFillHeart } from "react-icons/ai";
@@ -12,7 +12,6 @@ const Nav = () => {
   const { currentUser } = useContext(Auth);
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
-
   const handleSignIn = async () => {
     await signIn();
   };

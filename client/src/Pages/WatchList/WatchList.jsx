@@ -4,15 +4,16 @@ import { Link, useNavigate } from "react-router-dom";
 import CartLoader from "../../components/Loaders/CartLoader/CartLoader";
 import { useUserList } from "../../hooks/useHooks";
 import { BsThreeDots } from "react-icons/bs";
+
 const WatchList = () => {
   const { currentUser } = useContext(Auth);
   const navigate = useNavigate();
   const [option, setOption] = useState("All");
   const SelectRef = useRef(null);
-  const { data, isLoading, isError } = useUserList(currentUser.uid, option);
+  const { data, isLoading, isError } = useUserList(currentUser?.uid, option);
 
   useEffect(() => {
-    document.title = `Profile | Weeb-e-fied`;
+    document.title = `WatchList | Weeb-e-fied`;
     if (!currentUser) {
       navigate("/");
     }
@@ -100,34 +101,33 @@ const WatchList = () => {
         <option value="On-Hold">On-Hold</option>
       </select>
       <div className="flex flex-wrap mx-auto w-[95svw] gap-2 items-center justify-center">
-        {isLoading && <CartLoader />}
-        {isError && (
+        {isLoading ? (<CartLoader />):isError ?
+ (
           <h1 style={{ textAlign: "center", marginTop: "2rem" }}>
             Something went wrong
           </h1>
-        )}
-        {data?.length > 0 ? (
+        ):
+        data?.length > 0 ? (
           data?.map((anime) => (
             <Link key={anime.id} to={`/details/${anime.id?.split("__")[0]}?provider=kitsu`}>
               <div className="relative w-40 h-60 md:w-60 md:h-[21rem] p-2 cursor-pointer ">
-                <div className="relative w-full h-[calc(100%-2rem)]">
+                <div className="relative w-full h-full shadow-inner">
                   <img
                     src={anime.poster_image}
                     alt=""
                     className="absolute  w-full h-full object-cover"
                   />
-                  <p className="age_rating_">{anime.ageRating}</p>
+                  <p className="absolute z-10 bg-orange-500 p-1 text-white">{anime.ageRating}</p>
                 </div>
 
                 <BsThreeDots
                   className="absolute top-3 right-3 text-black"
                   size={25}
                 />
-                <div className="watchlist-anime-info">
+                <div className="absolute bottom-1 p-2 bg-gradient-to-t from-gray-800 via-gray-600 to-transparent w-36 md:w-56 text-white">
                   <h4 className="line-clamp-1">{anime.title}</h4>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 text-sm">
                     <p>{anime.showType} </p>
-                    <p className="age_rating_">{anime.ageRating}</p>
                     CC:{anime.totalEps || "Unknown"}
                   </div>
                 </div>
