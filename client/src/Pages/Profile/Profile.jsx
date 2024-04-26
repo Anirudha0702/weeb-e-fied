@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState, useRef } from "react";
+import { useContext, useEffect, useState } from "react";
 import getUser from "../../utils/getUser";
 import { Auth } from "../../Provider/AuthProvider";
 import { useNavigate } from "react-router-dom";
-import { MdVerified } from "react-icons/md";
 import Spinner from "../../components/Loaders/Spinner/Spinner";
 const Profile = () => {
   const { currentUser } = useContext(Auth);
@@ -46,7 +45,7 @@ const Profile = () => {
           backgroundImage: `url(${user?.coverURL})`,
         }}
       >
-        <div className="hero-overlay bg-opacity-70 h-[10rem] md:h-[15rem] "></div>
+        <div className="hero-overlay bg-opacity-70 h-[10rem] md:h-[15rem] filter"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-md">
             <h1 className="mb-5 text-5xl font-bold">
