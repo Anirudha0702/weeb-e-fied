@@ -4,8 +4,13 @@ import { useQuery } from "@tanstack/react-query"
 import { getTrendings } from '../../Api/Kitsu';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom'
+import CartLoader from '../Loaders/CartLoader/CartLoader';
 const Trending = () => {
     const ref=useRef(null);
+    const {isLoading,isPending,data}=useQuery({
+        queryKey:['trending'],
+        queryFn:getTrendings
+    })
     const btnpressprev = () => {
         let width = ref.current.clientWidth;
         ref.current.scrollLeft = ref.current.scrollLeft - width;
@@ -15,30 +20,14 @@ const Trending = () => {
         let width = ref.current.clientWidth;
         ref.current.scrollLeft = ref.current.scrollLeft + width;
     }
-    const {isLoading,isPending,data}=useQuery({
-        queryKey:['trending'],
-        queryFn:getTrendings
-    })
     if(isLoading || isPending){
-        <div className="trending__wrapper">
-        <div className="arraow__wrapper">
-            <GrNext className="arrow__icon" onClick={btnpressnext} />
-            <GrPrevious className="arrow__icon" onClick={btnpressprev}/>
+        <div className="cart_wrapper flex gap-2 bg-red-600" ref={ref}>
+            <CartLoader/>
         </div>
-        <div className='cart_wrapper' ref={ref}>
-        <div className="cart__img__wrapper loading" ></div>
-            <div className="cart__img__wrapper loading" ></div>
-            <div className="cart__img__wrapper loading" ></div>
-            <div className="cart__img__wrapper loading" ></div>
-            <div className="cart__img__wrapper loading" ></div>
-            <div className="cart__img__wrapper loading" ></div>
-            <div className="cart__img__wrapper loading" ></div>
-            <div className="cart__img__wrapper loading" ></div>
-        </div>
-    </div>
     }
   return (
-    <div className="mt-20 flex relative h-[15rem] md:h-[20rem] xl:h-[30vw] max-h-[20rem] xl:max-h-[30vw]">
+    <div className="mt-20 flex relative h-[15rem] md:h-[20rem] xl:h-[30vw] max-h-[20rem]">
+        <h3 className="absolute -top-12 block text-white font-medium text-2xl md:text-3xl  left-2">Trendings</h3>
         <div className="arraow__wrapper">
             <GrNext className="arrow__icon" onClick={btnpressnext} />
             <GrPrevious className="arrow__icon" onClick={btnpressprev}/>
