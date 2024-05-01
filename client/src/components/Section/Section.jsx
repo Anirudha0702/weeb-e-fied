@@ -1,9 +1,10 @@
 import { useList } from "../../hooks/useHooks";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import SectionLoader from "../Loaders/SectionLoader/SectionLoader";
 const Section = ({ header ,className}) => {
-  const { data, isError, isLoading } = useList(header.toLowerCase());
-  if(isLoading) return <SectionLoader header={header} className={className}/>
+  const { data, isLoading,isPending } = useList(header.toLowerCase());
+  if(isLoading || isPending) return <SectionLoader header={header} className={className}/>
   return (
     <div className={`flex flex-col gap-2 mt-20 relative ${className}  `} data-header={header}>
       <h3 className="absolute -top-12 block text-white font-medium text-2xl md:text-3xl ">{header}</h3>
@@ -46,6 +47,10 @@ const Section = ({ header ,className}) => {
       })}
     </div>
   );
+};
+Section.propTypes = {
+  header: PropTypes.string.isRequired,
+  className: PropTypes.string,
 };
 
 export default Section;

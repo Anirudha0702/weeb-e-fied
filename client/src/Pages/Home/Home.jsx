@@ -1,8 +1,11 @@
-import Hero from '../../components/Hero/Hero'
-import Section from '../../components/Section/Section'
-import Trending from '../../components/Trending/Trending'
+import React,{ Suspense } from 'react'
+const Hero = React.lazy(() => import('../../components/Hero/Hero'))
+const Section = React.lazy(() => import('../../components/Section/Section'))
+const Trending = React.lazy(() => import('../../components/Trending/Trending'))
+import HomeLoader from '../../components/Loaders/HomeLoader/HomeLoader'
 const Home = () => {
   return (
+    <Suspense fallback={<HomeLoader/>}>
     <>
     <Hero/>
     <Trending/>
@@ -12,6 +15,7 @@ const Home = () => {
       <Section header="Favorites" className=" sm:col-span-2 md:col-auto"/>
     </div>
     </>
+    </Suspense>
   )
 }
 

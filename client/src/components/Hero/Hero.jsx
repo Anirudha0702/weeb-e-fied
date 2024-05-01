@@ -22,13 +22,14 @@ const Hero = () => {
       clearInterval(interval);
     };
   });
+
   const recentAnimes = useQuery({
     queryKey: ["recentAnimes"],
     queryFn: getRecentAnimes,
   });
-  if (recentAnimes.isLoading) {
+  if (recentAnimes.isLoading || recentAnimes.isPending) {
     return (
-      <div className="relative h-80 md:h-[30rem]">
+      <div className="relative h-80 md:h-[30rem] skeleton">
         <Spinner />
       </div>
     );
@@ -39,11 +40,11 @@ const Hero = () => {
       <div className="absolute z-10 w-full h-full bg-gradient-to-r from-black to-black/40 via-black/50"></div>
       <div className="h-full z-0">
         <img
-          alt={recentAnimes.data[current].title}
+          alt={recentAnimes?.data[current]?.title}
           className={`object-cover w-full h-full ${
             current & (1 === 1) ? "fade_in" : "fade_out"
           }`}
-          src={recentAnimes.data[current].poster}
+          src={recentAnimes.data[current]?.poster}
         />
       </div>
       <div className="top-0 absolute z-20 flex flex-col items-start px-2 sm:px-10  justify-center w-full h-full text-white gap-4">
@@ -59,7 +60,7 @@ const Hero = () => {
             recentAnimes.data[current]?.subType ? (
               <div className="flex gap-1 items-center">
                 <FaPlayCircle />
-                <span>{recentAnimes.data[current]?.subType}</span>
+                <span>{recentAnimes?.data[current]?.subType}</span>
               </div>
             ):null
           }
@@ -95,18 +96,22 @@ const Hero = () => {
         <div className="flex gap-2 sm:gap-6">
           
           <Link to={`/watch/${recentAnimes.data[current]?.title}`}
-          className="flex items-center gap-1 bg-white text-black px-4 py-2 rounded-md">
-          
+          className="">
+          <button className="btn btn-outline btn-primary">
               <FaPlayCircle />
               Watch Now
+            </button>
 
           </Link>
           <Link
             to={`/details/${recentAnimes.data[current]?.id}?provider=kitsu`}
-            className="flex items-center gap-1 bg-white text-black px-4 py-2 rounded-md"
+            className="flex"
           >
+            <button className="btn btn-outline btn-info">
             <BsFillInfoCircleFill />
             <span>More Info</span>
+
+            </button>
           </Link>
         </div>
       </div>

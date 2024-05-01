@@ -1,4 +1,3 @@
-import "./VideoPlayer.css";
 import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';

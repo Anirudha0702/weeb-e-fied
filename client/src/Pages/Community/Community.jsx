@@ -9,6 +9,7 @@ import Modal from "../../components/CreatePost/Modal";
 import { Auth } from "../../Provider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import AllPosts from "../../components/AllPosts/AllPosts";
+import PostLoader from "../../components/Loaders/PostLoader/PostLoader";
 const Community = () => {
   const { currentUser } = useContext(Auth);
   const navigate = useNavigate();
@@ -26,12 +27,7 @@ const Community = () => {
     },
   });
 
-  if (posts.isLoading || posts.isPending) {
-    return <div>Loading...</div>;
-  }
-  if (posts.isError) {
-    return <div>Error</div>;
-  }
+
   return (
     <div className="community-page">
       <header className="community-header">
@@ -51,13 +47,20 @@ const Community = () => {
             </button>
             <Modal/>
           </div>
-          <AllPosts
-            posts={posts.data.pages.flatMap((page) => page.data)}
-            isError={posts.isError}
-            hasMore={posts.hasNextPage}
-            isLoading={posts.isLoading}
-            newPosts={posts.fetchNextPage}
-          />
+          {
+            posts?.isLoading?(
+              <PostLoader/>
+            ):posts.isError?(
+              <div className="flex mx-auto w-fit p-4">Unable to fetch posts Try again!!!</div>
+            
+            ):(<AllPosts
+              posts={posts.data.pages.flatMap((page) => page.data)}
+              isError={posts.isError}
+              hasMore={posts.hasNextPage}
+              isLoading={posts.isLoading}
+              newPosts={posts.fetchNextPage}
+            />)
+          }
         </div>
         <TopCharacters />
       </div>

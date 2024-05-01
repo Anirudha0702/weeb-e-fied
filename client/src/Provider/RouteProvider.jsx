@@ -1,5 +1,7 @@
 import { RouterProvider,createBrowserRouter,Outlet } from "react-router-dom";
-import Home from "../Pages/Home/Home";
+import React,{Suspense} from "react";
+const Home=React.lazy(()=>import("../Pages/Home/Home"));
+import HomeLoader from "../components/Loaders/HomeLoader/HomeLoader";
 import Watch from "../Pages/Watch/Watch";
 import Nav from "../components/Nav/Nav";
 import Details from "../Pages/Details/Details";
@@ -26,7 +28,7 @@ const router=createBrowserRouter(
             children:[
                 {
                     path:"/",
-                    element:<Home/>
+                    element:<Suspense fallback={<HomeLoader/>}><Home/></Suspense>
                 },
                 {
                     path:"/user/",
@@ -52,10 +54,6 @@ const router=createBrowserRouter(
                 {
                     path:'/watchlist',
                     element:<WatchList/>
-                },
-                {
-                    path:'/settings',
-                    element:"<h1>Settings</h1>"
                 },
                 {
                     path:'*',

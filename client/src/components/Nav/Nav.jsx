@@ -112,12 +112,12 @@ const Nav = () => {
     
                 </span>
               </li>
-              <li className="py-2  flex  gap-2 cursor-pointer ">
+              {/* <li className="py-2  flex  gap-2 cursor-pointer ">
                 <span>
                   <AiFillSetting className="" />
                   Settings
                 </span>
-              </li>
+              </li> */}
               <li
                 className="py-2  flex  gap-2 cursor-pointer "
                 onClick={async () => {
