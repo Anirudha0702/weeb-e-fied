@@ -29,16 +29,25 @@ const VideoPlayer = ({episodeId,isLoading,isError}) => {
   const saveProgress=(time)=>{
     localStorage.setItem(`${episodeId}`, time);
   }
-
+  if(!stream.isIdle||stream.isPending || stream.isLoading) {
+    <div className="">
+      <Spinner/>
+    </div>
+  }
+  if(stream.isError){
+    return <div className="error">
+    <BiError/><span>Try after sometime</span>
+    </div>
+  }
   return (
     <div className="relative flex flex-col h-full overflow-hidden gap-2 bg-black my-2">
     <div className="relative w-full h-[90%] " >
     {
-      (stream.isError ||isError )? (
-        <div className="error flex justify-center items-center">
+      isError ? (
+        <div className="error">
           <BiError/><span>Try after sometime</span>
         </div>
-      ):(!stream.isIdle||stream.isPending || stream.isLoading||isLoading)?(<div className="">
+      ):isLoading?(<div className="">
       <Spinner/>
     </div>):
       ReactPlayer.canPlay(videoUrl)  ? (
@@ -82,7 +91,7 @@ const VideoPlayer = ({episodeId,isLoading,isError}) => {
 VideoPlayer.propTypes = {
   episodeId: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  isError: PropTypes.bool.isRequired
+  isError: PropTypes.bool.isRequired,
 };
 
 export default VideoPlayer
