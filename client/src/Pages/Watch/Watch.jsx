@@ -11,7 +11,7 @@ const Watch = () => {
   useEffect(() => {
     document.title = `${param.name} | Weeb-e-fied`;
   }, [param.name]);
-  const result = useSearch(param.name, "weeb-e-fied");
+  const result = useSearch(param.name.replace('.'," "), "weeb-e-fied");
 
   const animeId = result?.success ? result.data?.id : "error";
   // const lastEp = localStorage.getItem(`${animeId}`);
@@ -41,7 +41,7 @@ const Watch = () => {
     </div>
     <div className="w-full   max-w-5xl mx-auto">
       <div className="w-full h-[30rem] md:h-[80svh] ">
-        <VideoPlayer episodeId={info?.data?.episodes[selectedEpisode-1]?.id} isLoading={isLoading}/>
+        <VideoPlayer episodeId={info?.data?.episodes[selectedEpisode-1]?.id} isLoading={isLoading} isError={isError}/>
       </div>
       <div className="w-full max-h-80 overflow-y-scroll h-fit my-4">
         {

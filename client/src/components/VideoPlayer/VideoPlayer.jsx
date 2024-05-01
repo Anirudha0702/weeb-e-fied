@@ -4,7 +4,7 @@ import ReactPlayer from 'react-player';
 import Spinner from "../Loaders/Spinner/Spinner";
 import { useStream } from "../../hooks/useHooks";
 import { BiError } from "react-icons/bi";
-const VideoPlayer = ({episodeId,isLoading}) => {
+const VideoPlayer = ({episodeId,isLoading,isError}) => {
   const[quality, setQuality] = useState('default');
   const stream=useStream(episodeId);
   const[videoUrl, setVideoUrl] = useState("");
@@ -29,7 +29,7 @@ const VideoPlayer = ({episodeId,isLoading}) => {
   const saveProgress=(time)=>{
     localStorage.setItem(`${episodeId}`, time);
   }
-  if(!stream.isIdle||stream.isPending || stream.isLoading||isLoading ) {
+  if(!stream.isIdle||stream.isPending || stream.isLoading) {
     <div className="">
       <Spinner/>
     </div>
@@ -43,6 +43,13 @@ const VideoPlayer = ({episodeId,isLoading}) => {
     <div className="relative flex flex-col h-full overflow-hidden gap-2 bg-black my-2">
     <div className="relative w-full h-[90%] " >
     {
+      isError ? (
+        <div className="error">
+          <BiError/><span>Try after sometime</span>
+        </div>
+      ):isLoading?(<div className="">
+      <Spinner/>
+    </div>):
       ReactPlayer.canPlay(videoUrl)  ? (
         <ReactPlayer 
         ref={video_Ref}
@@ -54,14 +61,9 @@ const VideoPlayer = ({episodeId,isLoading}) => {
         playing={true}
         onProgress={e=>{if(e.playedSeconds>10)saveProgress(e.playedSeconds)}}
       />
-      ):(videoUrl==="" || videoUrl===undefined)?(<div className="">
-      <Spinner/>
-    </div>):
-      (
-        <div className="error">
-          <BiError/><span>Try after sometime</span>
-        </div>
-      )
+      ):<div className="error">
+      <BiError/><span>Try after sometime</span>
+    </div>
 }
     </div>
    
@@ -88,7 +90,8 @@ const VideoPlayer = ({episodeId,isLoading}) => {
 
 VideoPlayer.propTypes = {
   episodeId: PropTypes.string.isRequired,
-  isLoading: PropTypes.bool.isRequired
+  isLoading: PropTypes.bool.isRequired,
+  isError: PropTypes.bool.isRequired
 };
 
 export default VideoPlayer
